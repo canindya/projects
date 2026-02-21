@@ -668,8 +668,8 @@
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#writing">Writing</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="#writing">Writings</a></li>
+      <li><a href="about.html">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme" tabindex="0">
@@ -683,7 +683,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Side Projects — 2024 / 2025</div>
+  <div class="hero-eyebrow">Side Projects — 2025 / 2026</div>
   <h1 class="hero-title">Things I build <em>after hours</em></h1>
   <p class="hero-sub">
     A curated collection of ideas shaped at the intersection of fintech domain expertise, product intuition, and a stubborn belief that one person with the right tools can build something meaningful.
@@ -838,6 +838,7 @@
     <div class="footer-links">
       <a href="https://www.linkedin.com/in/anindya-chakraborty/" target="_blank">LinkedIn</a>
       <a href="https://github.com/canindya" target="_blank">GitHub</a>
+      <a href="https://x.com/NtellShow" target="_blank">X</a>
       <a href="https://anindyachakraborty.substack.com/" target="_blank">Substack</a>
       <a href="mailto:anindya.chakraborty@gmail.com">Email</a>
     </div>
@@ -845,7 +846,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Theme toggle
   function toggleTheme() {
     const html = document.documentElement;
@@ -870,13 +871,4 @@
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
         setTimeout(() => { entry.target.classList.add('visible'); }, i * 150);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
-</script>
-
-</body>
-</html>
+        observer.unobserve(entry.tar
