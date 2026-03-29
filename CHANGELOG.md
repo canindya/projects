@@ -1,5 +1,17 @@
 # Changelog
 
+## [2026-03-29]
+
+### Changed
+- **Design**: Major visual overhaul — page loader, scroll progress bar, smart hide/show nav, cursor glow effect, multiple animated ambient orbs, scroll-triggered reveal animations, gradient accents, card spotlight hover effect, smooth page transitions
+- **Design**: New color palette — clean neutral backgrounds with deep blue accent (#2563eb/#0ea5e9) replacing warm beige/gold
+- **Mobile**: Added hamburger menu with animated toggle and full-screen nav overlay
+- **Tags/Buttons**: Pill-shaped tags and CTA buttons for modern feel
+
+### Added
+- **WorldMonitor**: Added as project 04 — AI-powered geopolitical intelligence dashboard (Live)
+- **City Kolkata**: Added as project 05 — 10-domain open-data dashboard for Kolkata (Live)
+
 ## [2026-03-09]
 
 ### Changed
