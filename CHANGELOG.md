@@ -1,5 +1,11 @@
 # Changelog
 
+## [2026-03-31]
+
+### Removed
+- **WorldMonitor**: Removed from projects (forked repository, not original work)
+- **Projects**: Renumbered City Kolkata from 05 to 04
+
 ## [2026-03-29]
 
 ### Changed
