@@ -1,5 +1,13 @@
 # Changelog
 
+## [2026-04-13]
+
+### Added
+- **West Bengal Through Data**: Added as project 05 — district-level open-data dashboard for West Bengal (Building, no public link)
+
+### Changed
+- **Kolkata City Dashboard**: Renamed from "City Kolkata"; updated description and tagline to reflect expanded coverage — now 18 domains, 30+ data sources, 141-ward choropleth, 75-year IMD climate records, 40-year metro ridership series, and cross-domain correlation insights
+
 ## [2026-03-31]
 
 ### Removed
