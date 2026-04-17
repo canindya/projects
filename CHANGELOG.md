@@ -1,5 +1,10 @@
 # Changelog
 
+## [2026-04-17]
+
+### Changed
+- **West Bengal Through Data**: Updated status from "Building" to "Live" and added public link to https://canindya.github.io/State-WestBengal/
+
 ## [2026-04-13]
 
 ### Added
