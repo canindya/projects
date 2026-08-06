@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anindya Chakraborty — Side Projects</title>
+<title>Anindya Chakraborty — Projects</title>
+<meta name="description" content="Independent projects by Anindya Chakraborty: open-data dashboards for Kolkata and West Bengal, a global cost-of-living tracker, an NSE equity screening pipeline, and an Android medication reminder.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Anindya Chakraborty — Projects">
+<meta property="og:description" content="Open-data dashboards, a global cost-of-living tracker, an equity screening pipeline, and an Android medication reminder. Built end to end.">
+<meta property="og:url" content="https://canindya.github.io/projects/">
+<meta property="og:image" content="https://canindya.github.io/projects/assets/kolkata-dashboard.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anindya Chakraborty — Projects">
+<meta name="twitter:description" content="Open-data dashboards, a global cost-of-living tracker, an equity screening pipeline, and an Android medication reminder. Built end to end.">
+<meta name="twitter:image" content="https://canindya.github.io/projects/assets/kolkata-dashboard.jpg">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232563eb'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+
+<script>
+  // Set the theme before first paint: saved choice wins, otherwise follow the OS.
+  // Inline and blocking on purpose — deferring this causes a flash of the wrong theme.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   /* === LIGHT THEME (default) === */
   :root, [data-theme="light"] {
+    color-scheme: light;
     --bg: #fafafa;
     --bg-card: #ffffff;
     --bg-card-hover: #f8f9fc;
@@ -16,15 +44,10 @@
     --text-muted: #64748b;
     --text-dim: #94a3b8;
     --accent: #2563eb;
-    --accent-2: #0ea5e9;
-    --accent-soft: #2563eb10;
-    --accent-glow: #2563eb06;
     --border: #e2e8f0;
     --border-hover: #cbd5e1;
     --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.03);
     --card-shadow-hover: 0 4px 12px rgba(37,99,235,0.08), 0 12px 40px rgba(0,0,0,0.06);
-    --card-glow: 0 0 40px rgba(37,99,235,0.06);
-    --noise-opacity: 0.015;
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans: 'DM Sans', system-ui, sans-serif;
     --mono: 'JetBrains Mono', monospace;
@@ -32,6 +55,7 @@
 
   /* === DARK THEME === */
   [data-theme="dark"] {
+    color-scheme: dark;
     --bg: #09090b;
     --bg-card: #111114;
     --bg-card-hover: #16161a;
@@ -40,19 +64,24 @@
     --text-muted: #8b8fa3;
     --text-dim: #525669;
     --accent: #60a5fa;
-    --accent-2: #38bdf8;
-    --accent-soft: #60a5fa18;
-    --accent-glow: #60a5fa10;
     --border: #1e1e24;
     --border-hover: #2a2a34;
     --card-shadow: none;
     --card-shadow-hover: 0 4px 20px rgba(96,165,250,0.06);
-    --card-glow: 0 0 60px rgba(96,165,250,0.05);
-    --noise-opacity: 0.025;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    [data-animate], .reveal { opacity: 1 !important; transform: none !important; }
+  }
 
   body {
     font-family: var(--sans);
@@ -66,136 +95,24 @@
 
   ::selection { background: var(--accent); color: var(--bg); }
 
-  /* === PAGE LOADER === */
-  .page-loader {
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.6s ease, visibility 0.6s ease;
-  }
-
-  .page-loader.done {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .loader-logo {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    color: var(--text);
-    opacity: 0;
-    transform: scale(0.95);
-    animation: loaderReveal 0.8s 0.1s ease forwards;
-  }
-
-  .loader-logo span { color: var(--accent); font-style: italic; }
-
-  @keyframes loaderReveal {
-    to { opacity: 1; transform: scale(1); }
-  }
-
   /* === SCROLL PROGRESS === */
   .scroll-progress {
     position: fixed;
     top: 0; left: 0;
     width: 0%; height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    background: var(--accent);
     z-index: 200;
     transition: width 0.1s linear;
   }
 
-  /* === NOISE OVERLAY === */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: var(--noise-opacity);
-    pointer-events: none;
-    z-index: 9999;
-    transition: opacity 0.5s;
-  }
-
-  /* === AMBIENT ORBS === */
-  .ambient-wrap {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-
-  .orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.4;
-    transition: background 0.5s;
-  }
-
-  .orb-1 {
-    width: 60vw; height: 60vw;
-    top: -20%; left: -15%;
-    background: var(--accent-glow);
-    animation: orbFloat1 25s ease-in-out infinite alternate;
-  }
-
-  .orb-2 {
-    width: 40vw; height: 40vw;
-    bottom: -10%; right: -10%;
-    background: var(--accent-glow);
-    animation: orbFloat2 20s ease-in-out infinite alternate;
-  }
-
-  .orb-3 {
-    width: 30vw; height: 30vw;
-    top: 40%; left: 50%;
-    background: var(--accent-glow);
-    animation: orbFloat3 30s ease-in-out infinite alternate;
-  }
-
-  @keyframes orbFloat1 {
-    0% { transform: translate(0,0) scale(1); }
-    100% { transform: translate(10vw, 5vh) scale(1.15); }
-  }
-  @keyframes orbFloat2 {
-    0% { transform: translate(0,0) scale(1); }
-    100% { transform: translate(-8vw, -3vh) scale(1.1); }
-  }
-  @keyframes orbFloat3 {
-    0% { transform: translate(0,0) scale(1); }
-    100% { transform: translate(5vw, -8vh) scale(0.9); }
-  }
-
-  /* === CURSOR GLOW === */
-  .cursor-glow {
-    position: fixed;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  body:hover .cursor-glow { opacity: 1; }
-
   /* === GLOBAL TRANSITIONS === */
-  nav, .project-card, .meta-block, .about-cell, .philosophy blockquote,
+  nav, .project-card, .about-cell, .philosophy blockquote,
   .philosophy .attribution, .footer-left .footer-name, .footer-left .footer-desc,
   .footer-copy, .section-label, .section-title, .hero-title, .hero-sub,
-  .project-content h3, .project-tagline, .project-desc, .meta-label, .meta-value,
+  .project-card h3, .featured-body h3, .project-desc, .project-lede,
+  .project-facts, .fact-num, .fact-label, .project-eyebrow,
   .about-cell .stat, .about-cell .stat-label, .about-cell .stat-desc, .tag,
-  .footer-links a, .project-number {
+  .footer-links a {
     transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
   }
 
@@ -251,7 +168,7 @@
     position: absolute;
     bottom: -4px; left: 0;
     width: 0; height: 1px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    background: var(--accent);
     transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
@@ -404,10 +321,7 @@
   .hero-title em {
     font-style: italic;
     font-weight: 300;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent);
   }
 
   .hero-sub {
@@ -423,7 +337,7 @@
 
   .hero-rule {
     width: 60px; height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    background: var(--accent);
     margin-top: 3rem;
     opacity: 0;
     animation: fadeSlideUp 1s 1.5s ease forwards;
@@ -456,7 +370,7 @@
     position: absolute;
     top: 0; left: -100%;
     width: 100%; height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    background: var(--accent);
     animation: scrollPulse 2s ease-in-out infinite;
   }
 
@@ -490,10 +404,7 @@
 
   .section-title em {
     font-style: italic;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent);
   }
 
   /* === REVEAL ANIMATIONS === */
@@ -508,179 +419,266 @@
     transform: translateY(0);
   }
 
-  /* === PROJECT CARDS === */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  /* === PROJECTS === */
+  .projects-wrap {
     max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
   }
 
-  .project-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(30px);
-    box-shadow: var(--card-shadow);
-  }
+  [data-animate] { opacity: 0; transform: translateY(24px); }
 
-  .project-card.visible {
+  [data-animate].visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s, border-color 0.5s, box-shadow 0.5s;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 0;
-    background: linear-gradient(180deg, var(--accent), var(--accent-2));
-    transition: height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .project-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 4px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-soft), transparent 40%);
-  }
-
-  .project-card:hover {
-    background: var(--bg-card-hover);
-    border-color: var(--border-hover);
-    transform: translateY(-4px);
-    box-shadow: var(--card-shadow-hover), var(--card-glow);
-  }
-
-  .project-card:hover::before { height: 100%; }
-  .project-card:hover::after { opacity: 1; }
-
-  .project-number {
-    font-family: var(--serif);
-    font-size: 5rem;
-    font-weight: 300;
-    color: var(--accent);
-    opacity: 0.12;
-    line-height: 1;
-    position: absolute;
-    top: 1.5rem; right: 2rem;
-    transition: opacity 0.4s;
-  }
-
-  .project-card:hover .project-number { opacity: 0.2; }
-
-  .project-content h3 {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
-  }
-
-  .project-tagline {
-    font-size: 0.85rem;
-    color: var(--accent);
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    margin-bottom: 1.5rem;
-  }
-
-  .project-desc {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 2rem;
-  }
-
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-
-  .tag {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.4rem 0.8rem;
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    border-radius: 100px;
-    transition: all 0.3s;
-  }
-
-  .project-card:hover .tag {
-    border-color: var(--border-hover);
-    color: var(--text-muted);
-  }
-
-  .project-meta { display: flex; flex-direction: column; gap: 1.5rem; }
-
-  .meta-block { padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
-  .meta-block:last-child { border-bottom: none; }
-
-  .meta-label {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 0.5rem;
-  }
-
-  .meta-value { font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
-
-  .status-badge {
+  /* -- shared -- */
+  .project-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
     font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    color: var(--text-dim);
   }
 
   .status-dot {
     width: 6px; height: 6px;
     border-radius: 50%;
-    background: #5cb85c;
-    animation: pulse 2s ease-in-out infinite;
-    box-shadow: 0 0 8px rgba(92,184,92,0.4);
+    background: #16a34a;
+    flex-shrink: 0;
   }
 
-  .status-dot.concept { background: var(--accent); box-shadow: 0 0 8px var(--accent-soft); }
+  [data-theme="dark"] .status-dot { background: #4ade80; }
+  .status-dot.building { background: var(--accent); }
 
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .project-desc {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: 3px;
+    white-space: nowrap;
+  }
 
   .project-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.6rem;
     font-size: 0.75rem;
     font-weight: 400;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
     text-decoration: none;
-    margin-top: 1rem;
-    transition: gap 0.3s;
   }
 
-  .project-link:hover { gap: 1.2rem; }
+  .project-link svg { width: 15px; height: 15px; stroke: currentColor; transition: transform 0.3s; }
+  .project-link:hover svg { transform: translateX(4px); }
 
-  .project-link svg { width: 16px; height: 16px; stroke: currentColor; transition: transform 0.3s; }
-  .project-link:hover svg { transform: translateX(2px); }
+  /* -- featured -- */
+  .project-featured {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .project-featured.no-visual { grid-template-columns: 1fr; max-width: 720px; }
+  .project-featured.no-visual .project-visual { display: none; }
+
+  .featured-body h3 {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 1rem 0 0.9rem;
+  }
+
+  .project-lede {
+    font-size: 1.02rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .project-facts {
+    display: flex;
+    gap: 2.25rem;
+    list-style: none;
+    margin: 1.75rem 0;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .fact-num {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .fact-label {
+    font-family: var(--mono);
+    font-size: 0.57rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.5rem;
+  }
+
+  .featured-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+  }
+
+  .project-visual {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-card);
+    box-shadow: var(--card-shadow);
+    transition: border-color 0.5s, box-shadow 0.5s;
+  }
+
+  .project-visual img {
+    display: block;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  /* -- secondary grid -- */
+  .projects-secondary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: var(--card-shadow);
+  }
+
+  .card-thumb {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* Flex items default to min-height:auto, which would pin this to the
+       image's intrinsic 800px height. Let it shrink to the card width. */
+    min-height: 0;
+    flex-shrink: 0;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top center;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.5s;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.75rem 2rem 2rem;
+  }
+
+  /* Stand-in for projects with no public build to screenshot. */
+  .card-thumb-none {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-card-hover);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    transition: background 0.5s, border-color 0.5s, color 0.5s;
+  }
+
+  a.project-card {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, box-shadow 0.35s, background 0.5s;
+  }
+
+  a.project-card:hover {
+    transform: translateY(-3px);
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0.9rem 0 0.75rem;
+  }
+
+  .project-card h3 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .card-arrow {
+    flex-shrink: 0;
+    width: 16px; height: 16px;
+    stroke: var(--text-dim);
+    fill: none;
+    stroke-width: 1.5;
+    margin-top: 0.4rem;
+    transition: stroke 0.3s, transform 0.3s;
+  }
+
+  a.project-card:hover .card-arrow {
+    stroke: var(--accent);
+    transform: translate(3px, -3px);
+  }
+
+  .card-body .project-tags { margin-top: 1.5rem; }
+  .project-card .project-desc { flex: 1; }
 
   /* === PHILOSOPHY === */
   .philosophy {
@@ -699,7 +697,7 @@
     position: relative;
     padding-left: 2rem;
     border-left: 2px solid transparent;
-    border-image: linear-gradient(180deg, var(--accent), var(--accent-2)) 1;
+    border-left-color: var(--accent);
   }
 
   .philosophy .attribution {
@@ -750,7 +748,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    background: var(--accent);
     opacity: 0;
     transition: opacity 0.4s;
     border-radius: inherit;
@@ -791,10 +789,7 @@
     font-family: var(--serif);
     font-size: 2.5rem;
     font-weight: 300;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent);
     margin-bottom: 0.5rem;
   }
 
@@ -851,7 +846,7 @@
     position: absolute;
     bottom: -2px; left: 0;
     width: 0; height: 1px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    background: var(--accent);
     transition: width 0.3s ease;
   }
 
@@ -871,6 +866,13 @@
   }
 
   /* === RESPONSIVE === */
+  @media (max-width: 940px) {
+    .project-featured { grid-template-columns: 1fr; gap: 2.5rem; }
+    .project-featured .project-visual { order: -1; }
+    .projects-secondary { grid-template-columns: 1fr; }
+    .projects-wrap { gap: 3.5rem; }
+  }
+
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
@@ -878,8 +880,9 @@
     .mobile-menu { display: flex; }
     .hero { padding: 0 1.5rem; min-height: 100svh; }
     section { padding: 5rem 1.5rem; }
-    .project-card { grid-template-columns: 1fr; padding: 2rem; }
-    .project-number { font-size: 3rem; top: 1rem; right: 1.5rem; }
+    .card-body { padding: 1.5rem 1.75rem 1.75rem; }
+    .project-facts { gap: 1.5rem; }
+    .featured-foot { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
     .about-strip { grid-template-columns: 1fr; }
     .about-cell { border-right: none; border-bottom: 1px solid var(--border); }
     .about-cell:last-child { border-bottom: none; }
@@ -894,23 +897,8 @@
 </head>
 <body>
 
-<!-- PAGE LOADER -->
-<div class="page-loader" id="pageLoader">
-  <div class="loader-logo">A<span>.</span>C</div>
-</div>
-
 <!-- SCROLL PROGRESS -->
 <div class="scroll-progress" id="scrollProgress"></div>
-
-<!-- CURSOR GLOW -->
-<div class="cursor-glow" id="cursorGlow"></div>
-
-<!-- AMBIENT ORBS -->
-<div class="ambient-wrap">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-</div>
 
 <!-- NAV -->
 <nav id="mainNav">
@@ -946,10 +934,10 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Side Projects — 2025 / 2026</div>
-  <h1 class="hero-title">Things I build <em>after hours</em></h1>
+  <div class="hero-eyebrow">Independent Work</div>
+  <h1 class="hero-title">Things I build, <em>end to end</em></h1>
   <p class="hero-sub">
-    A curated collection of ideas shaped at the intersection of fintech domain expertise, product intuition, and a stubborn belief that one person with the right tools can build something meaningful.
+    Open-data dashboards for a city and a state, a global cost-of-living tracker, an equity screening pipeline, and an Android medication reminder. Data pipeline, front end and deployment — all of it mine.
   </p>
   <div class="hero-rule"></div>
   <div class="scroll-hint">
@@ -963,214 +951,128 @@
   <div class="section-label reveal">Portfolio</div>
   <h2 class="section-title reveal">Selected <em>works</em></h2>
 
-  <div class="projects-grid">
+  <div class="projects-wrap">
 
-    <!-- PROJECT 01 -->
-    <div class="project-card" data-animate>
-      <div class="project-number">01</div>
-      <div class="project-content">
-        <h3>RemindMe</h3>
-        <div class="project-tagline">Medication, simplified.</div>
-        <p class="project-desc">
-          A HIPAA-compliant Android medication reminder that makes adherence effortless. Scan prescriptions with ML Kit OCR, add meds via voice, and never miss a dose. Built entirely with AI-assisted development to prove what one person and the right tools can ship.
-        </p>
-        <div class="project-tags">
-          <span class="tag">Android</span>
-          <span class="tag">ML Kit OCR</span>
-          <span class="tag">Voice Input</span>
-          <span class="tag">HIPAA</span>
-          <span class="tag">Freemium</span>
-        </div>
-        <a href="https://remindme-ad455.web.app" target="_blank" class="project-link">
-          View project
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div class="project-meta">
-        <div class="meta-block">
-          <div class="meta-label">Status</div>
-          <div class="meta-value">
-            <span class="status-badge">
-              <span class="status-dot"></span>
-              Live
-            </span>
-          </div>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">The Insight</div>
-          <div class="meta-value">Medication non-adherence costs $500B annually. Existing apps are cluttered and assume tech-savvy users. RemindMe strips it back — scan, set, forget.</div>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">What's Next</div>
-          <div class="meta-value">Multi-patient support for caregivers, cloud backup, and a premium tier. Exploring partnerships with pharmacy chains.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROJECT 02 -->
-    <div class="project-card" data-animate>
-      <div class="project-number">02</div>
-      <div class="project-content">
-        <h3>StockPicker</h3>
-        <div class="project-tagline">1,800 stocks in. 50 out.</div>
-        <p class="project-desc">
-          A six-stage analysis pipeline that scans every stock on NSE — combining fundamental screening, technical signals, quant momentum scoring, and a three-model ML ensemble — to surface the 50 stocks most likely to grow. Includes a full web UI with deep-dive profiles, portfolio builder, swing trade setups, paper trading, and exportable reports.
-        </p>
-        <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag">Machine Learning</span>
-          <span class="tag">NSE / Indian Markets</span>
-          <span class="tag">Quant</span>
-          <span class="tag">Full-Stack</span>
-        </div>
-      </div>
-      <div class="project-meta">
-        <div class="meta-block">
-          <div class="meta-label">Status</div>
-          <div class="meta-value">
-            <span class="status-badge">
-              <span class="status-dot"></span>
-              Active Development
-            </span>
-          </div>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">The Insight</div>
-          <div class="meta-value">Retail investors drown in stock tips but lack systematic frameworks. StockPicker replaces gut feeling with a transparent, multi-signal scoring engine — every pick comes with a full breakdown of why it scored the way it did.</div>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">How It Works</div>
-          <div class="meta-value">5-layer data pipeline with near-zero gaps → macro regime detection → hard fundamental filters → 9 technical + 7 momentum signals → RF/XGBoost/LR ensemble → risk-adjusted final ranking. All thresholds configurable via YAML.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROJECT 03 -->
-    <div class="project-card" data-animate>
-      <div class="project-number">03</div>
-      <div class="project-content">
-        <h3>Cost of Living Tracker</h3>
-        <div class="project-tagline">193 countries. One dashboard.</div>
-        <p class="project-desc">
-          An interactive global cost-of-living tracker that visualises how prices have changed across 193 countries over 1, 5, and 10-year windows. Choropleth world map, multi-category breakdowns (CPI, food, energy, education), country comparisons, and PPP-adjusted views — all powered by World Bank and FAOSTAT open data.
-        </p>
-        <div class="project-tags">
-          <span class="tag">React</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">Leaflet</span>
-          <span class="tag">Recharts</span>
-          <span class="tag">World Bank API</span>
-        </div>
-        <a href="https://canindya.github.io/price-rise/" target="_blank" class="project-link">
-          View project
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div class="project-meta">
-        <div class="meta-block">
-          <div class="meta-label">Status</div>
-          <div class="meta-value">
-            <span class="status-badge">
-              <span class="status-dot"></span>
-              Live
-            </span>
-          </div>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">The Insight</div>
-          <div class="meta-value">Inflation is felt locally but driven globally. Most dashboards show one country at a time. This puts the whole world on one screen — compare your country against any other, across any category, in seconds.</div>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">What's Next</div>
-          <div class="meta-value">Personal basket weighting, threshold alerts, housing and healthcare categories, and historical event overlays on trend charts.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROJECT 04 -->
-    <div class="project-card" data-animate>
-      <div class="project-number">04</div>
-      <div class="project-content">
+    <!-- FEATURED -->
+    <article class="project-featured" data-animate>
+      <div class="featured-body">
+        <div class="project-eyebrow"><span class="status-dot"></span>Live &nbsp;·&nbsp; Open data</div>
         <h3>Kolkata City Dashboard</h3>
-        <div class="project-tagline">18 domains. 30+ sources. One city.</div>
-        <p class="project-desc">
-          An interactive open-data dashboard for Kolkata spanning demographics, elections, land use, climate, air quality, water and flooding, healthcare, disease, education, crime, judiciary, transport, budget, real estate, employment, energy, and digital infrastructure. 30+ open data sources stitched together, a 141-ward interactive choropleth, 75 years of IMD climate records, a 40-year metro ridership series, and cross-domain correlation insights — with automated refresh via GitHub Actions.
+        <p class="project-lede">
+          Nineteen domains of open data about one city — demographics, climate, air quality, transport, budget, crime, health — stitched into a single interactive portrait.
         </p>
-        <div class="project-tags">
-          <span class="tag">Next.js</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">Python</span>
-          <span class="tag">Leaflet</span>
-          <span class="tag">Recharts</span>
-          <span class="tag">Open Data</span>
-        </div>
-        <a href="https://canindya.github.io/City-Kolkata" target="_blank" class="project-link">
-          View project
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div class="project-meta">
-        <div class="meta-block">
-          <div class="meta-label">Status</div>
-          <div class="meta-value">
-            <span class="status-badge">
-              <span class="status-dot"></span>
-              Live
-            </span>
+        <p class="project-desc">
+          Thirty-plus primary sources arrive as APIs, CSVs and PDF-only government releases. A Python pipeline cleans and aggregates them into JSON committed to the repo; Next.js inlines that at build time, so every chart is pre-rendered with no runtime database. Every figure links back to its source, and the known limitations are published rather than hidden.
+        </p>
+        <ul class="project-facts">
+          <li>
+            <div class="fact-num">141</div>
+            <div class="fact-label">Wards mapped</div>
+          </li>
+          <li>
+            <div class="fact-num">30+</div>
+            <div class="fact-label">Primary sources</div>
+          </li>
+          <li>
+            <div class="fact-num">19</div>
+            <div class="fact-label">Domains</div>
+          </li>
+        </ul>
+        <div class="featured-foot">
+          <div class="project-tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">Python</span>
+            <span class="tag">Leaflet</span>
           </div>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">The Insight</div>
-          <div class="meta-value">Open city data exists but is scattered across PDFs, CSVs, and government portals. This dashboard stitches 30+ sources into a single interactive view — making Kolkata's story legible at a glance, from 1690 to 2026.</div>
-        </div>
-        <div class="meta-block">
-          <div class="meta-label">What's Next</div>
-          <div class="meta-value">Real-time traffic heatmaps, ward-level budget tracking, and comparative analysis with other Indian metros.</div>
+          <a href="https://kolkata.datacarta.in/" target="_blank" rel="noopener" class="project-link">
+            View project
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
-    </div>
+      <figure class="project-visual">
+        <img src="assets/kolkata-dashboard.jpg" width="1280" height="800" alt="The Kolkata City Dashboard ward map: an interactive choropleth of all 141 municipal wards coloured by population, with summary tiles above it.">
+      </figure>
+    </article>
 
-    <!-- PROJECT 05 -->
-    <div class="project-card" data-animate>
-      <div class="project-number">05</div>
-      <div class="project-content">
-        <h3>West Bengal Through Data</h3>
-        <div class="project-tagline">Zooming out from the city to the state.</div>
-        <p class="project-desc">
-          A companion to the Kolkata City Dashboard that lifts the lens from a single metro to all of West Bengal — district-level demographics, economy, climate, health, education, and infrastructure stitched from open government sources into one interactive view.
-        </p>
-        <div class="project-tags">
-          <span class="tag">Next.js</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">Python</span>
-          <span class="tag">Leaflet</span>
-          <span class="tag">Recharts</span>
-          <span class="tag">Open Data</span>
-        </div>
-        <a href="https://canindya.github.io/State-WestBengal/" target="_blank" class="project-link">
-          View project
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div class="project-meta">
-        <div class="meta-block">
-          <div class="meta-label">Status</div>
-          <div class="meta-value">
-            <span class="status-badge">
-              <span class="status-dot"></span>
-              Live
-            </span>
+    <!-- SECONDARY -->
+    <div class="projects-secondary">
+
+      <a class="project-card" data-animate href="https://westbengal.datacarta.in/" target="_blank" rel="noopener">
+        <img class="card-thumb" src="assets/westbengal-dashboard.jpg" width="1280" height="800" loading="lazy" alt="The West Bengal State Dashboard home page, showing a GSDP trend chart and state summary figures.">
+        <div class="card-body">
+          <div class="project-eyebrow"><span class="status-dot"></span>Live</div>
+          <div class="card-head">
+            <h3>West Bengal Through Data</h3>
+            <svg class="card-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+          <p class="project-desc">
+            The same treatment applied to a whole state — 19 domains, 40+ open data sources and drill-downs for all 23 districts, covering demographics, economy, climate, health, education and infrastructure.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">Python</span>
+            <span class="tag">Open Data</span>
           </div>
         </div>
-        <div class="meta-block">
-          <div class="meta-label">The Insight</div>
-          <div class="meta-value">A city dashboard answers "how is Kolkata doing?" A state dashboard answers "how does Kolkata compare to the rest of Bengal?" Both questions need the same treatment — open data, stitched together, made legible.</div>
+      </a>
+
+      <a class="project-card" data-animate href="https://canindya.github.io/price-rise/" target="_blank" rel="noopener">
+        <img class="card-thumb" src="assets/cost-of-living.jpg" width="1280" height="800" loading="lazy" alt="The Cost of Living Tracker explore view: a world choropleth of price changes beside a multi-category price trend chart.">
+        <div class="card-body">
+          <div class="project-eyebrow"><span class="status-dot"></span>Live</div>
+          <div class="card-head">
+            <h3>Cost of Living Tracker</h3>
+            <svg class="card-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+          <p class="project-desc">
+            How consumer prices moved across 180+ countries over 25 years, on a world choropleth with 1, 5 and 10-year windows. Five spending categories, plus local-currency and PPP-adjusted views.
+          </p>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Leaflet</span>
+          </div>
         </div>
-        <div class="meta-block">
-          <div class="meta-label">What's Next</div>
-          <div class="meta-value">District-level choropleths, rural vs. urban splits, and direct comparisons between Kolkata and the rest of the state.</div>
+      </a>
+
+      <a class="project-card" data-animate href="https://remindme-ad455.web.app" target="_blank" rel="noopener">
+        <img class="card-thumb" src="assets/remindme.jpg" width="1280" height="800" loading="lazy" alt="The RemindMe landing page, showing the Android app's home screen with quick actions for members, caregivers, doctor visits and medical tests.">
+        <div class="card-body">
+          <div class="project-eyebrow"><span class="status-dot"></span>Live on Google Play</div>
+          <div class="card-head">
+            <h3>RemindMe</h3>
+            <svg class="card-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+          <p class="project-desc">
+            An Android medication reminder built around the moments that break adherence — entering the prescription and remembering the dose. Extends to doctor visits, medical tests, refill tracking and caregiver alerts. Nine languages, no ads, no paywall.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Android</span>
+            <span class="tag">Kotlin</span>
+            <span class="tag">ML Kit OCR</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="project-card" data-animate>
+        <div class="card-thumb-none">No public build yet</div>
+        <div class="card-body">
+          <div class="project-eyebrow"><span class="status-dot building"></span>In development</div>
+          <div class="card-head">
+            <h3>StockPicker</h3>
+          </div>
+          <p class="project-desc">
+            A six-stage pipeline that scans all ~1,800 NSE-listed stocks and ranks the top 50 — fundamental filters, nine technical and seven momentum signals, then a random forest / XGBoost / logistic regression ensemble. Every pick ships with the score breakdown behind it.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Quant</span>
+          </div>
         </div>
       </div>
+
     </div>
 
   </div>
@@ -1178,7 +1080,6 @@
 
 <!-- PHILOSOPHY -->
 <section class="philosophy reveal">
-  <div class="section-label">Philosophy</div>
   <blockquote>
     The best way to complain is to build it.
   </blockquote>
@@ -1188,7 +1089,7 @@
 <section class="writing reveal" id="writing">
   <div class="section-label">Writing</div>
   <h2 class="section-title">Finance, Function, <em>Fiction</em></h2>
-  <p class="writing-desc">Occasional essays at the intersection of banking expertise, product development, and the power of books.</p>
+  <p class="writing-desc">Occasional essays on banking, product development, and books.</p>
   <a href="https://anindyachakraborty.substack.com/" target="_blank" class="substack-link">
     <span>Read on Substack</span>
     <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1198,19 +1099,19 @@
 <!-- ABOUT STRIP -->
 <div class="about-strip" id="about">
   <div class="about-cell">
-    <div class="stat" data-count="$150M+">$150M+</div>
-    <div class="stat-label">Products Shipped</div>
-    <div class="stat-desc">Led programs from zero-to-launch across Amazon, Citi, Bandhan Bank, and PwC. APIs, payments, platforms — at scale.</div>
+    <div class="stat">4</div>
+    <div class="stat-label">Live in production</div>
+    <div class="stat-desc">Two open-data dashboards, a cost-of-living tracker, and an Android app — all publicly accessible, with a fifth in development.</div>
   </div>
   <div class="about-cell">
-    <div class="stat" data-count="15+">15+</div>
-    <div class="stat-label">Years Leading Product</div>
-    <div class="stat-desc">IIM Calcutta MBA. Roadmaps, P&Ls, and cross-functional teams across ecommerce, banking, and fintech.</div>
+    <div class="stat">15+</div>
+    <div class="stat-label">Years in product</div>
+    <div class="stat-desc">Product roles across Amazon, Citi, Bandhan Bank and PwC, spanning ecommerce, banking and fintech. MBA, IIM Calcutta.</div>
   </div>
   <div class="about-cell">
-    <div class="stat">AI×1</div>
-    <div class="stat-label">What's Next</div>
-    <div class="stat-desc">One person, AI-augmented. Building the products I spent fifteen years wishing existed.</div>
+    <div class="stat">Solo</div>
+    <div class="stat-label">How these get built</div>
+    <div class="stat-desc">Every project here is mine end to end — sourcing the data, writing the pipeline, building the interface, and shipping it.</div>
   </div>
 </div>
 
@@ -1218,7 +1119,7 @@
 <footer id="contact">
   <div class="footer-left">
     <div class="footer-name">Anindya Chakraborty</div>
-    <div class="footer-desc">Product leader. Builder. IIM Calcutta.</div>
+    <div class="footer-desc">Product leader. Builder.</div>
   </div>
   <div class="footer-right">
     <div class="footer-links">
@@ -1228,12 +1129,12 @@
       <a href="https://anindyachakraborty.substack.com/" target="_blank">Substack</a>
       <a href="mailto:anindya.chakraborty@gmail.com">Email</a>
     </div>
-    <div class="footer-copy">&copy; 2025 — Built with care and caffeine</div>
+    <div class="footer-copy">&copy; 2026 Anindya Chakraborty</div>
   </div>
 </footer>
 
 <script>
-  // Theme toggle
+  // Theme toggle. The initial theme is set by the blocking script in <head>.
   function toggleTheme() {
     const html = document.documentElement;
     const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -1241,22 +1142,9 @@
     try { localStorage.setItem('theme', next); } catch(e) {}
   }
 
-  // Restore saved theme
-  try {
-    const saved = localStorage.getItem('theme');
-    if (saved) document.documentElement.setAttribute('data-theme', saved);
-  } catch(e) {}
-
   // Keyboard support for toggle
   document.querySelector('.theme-toggle').addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); }
-  });
-
-  // === PAGE LOADER ===
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('pageLoader').classList.add('done');
-    }, 600);
   });
 
   // === SCROLL PROGRESS BAR ===
@@ -1281,20 +1169,13 @@
     lastScroll = currentScroll;
   }, { passive: true });
 
-  // === CURSOR GLOW ===
-  const cursorGlow = document.getElementById('cursorGlow');
-  document.addEventListener('mousemove', (e) => {
-    cursorGlow.style.left = e.clientX + 'px';
-    cursorGlow.style.top = e.clientY + 'px';
-  });
-
-  // === CARD MOUSE TRACKING ===
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
-      card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
-    });
+  // === FEATURED VISUAL ===
+  // Collapse the featured project to a single column if its screenshot is missing,
+  // so an absent asset never renders as a broken image.
+  document.querySelectorAll('.project-visual img').forEach(img => {
+    const drop = () => img.closest('.project-featured').classList.add('no-visual');
+    if (img.complete && img.naturalWidth === 0) drop();
+    img.addEventListener('error', drop);
   });
 
   // === MOBILE MENU ===
@@ -1344,20 +1225,9 @@
 
   // Fallback: if cards are still hidden after 2s, force them visible
   setTimeout(() => {
-    document.querySelectorAll('.project-card:not(.visible)').forEach(el => el.classList.add('visible'));
+    document.querySelectorAll('[data-animate]:not(.visible)').forEach(el => el.classList.add('visible'));
   }, 2000);
 
-  // === SMOOTH PAGE TRANSITIONS ===
-  document.querySelectorAll('a[href]').forEach(link => {
-    if (link.hostname === window.location.hostname && !link.hash && link.href !== window.location.href) {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.3s ease';
-        setTimeout(() => { window.location = link.href; }, 300);
-      });
-    }
-  });
 </script>
 
 </body>

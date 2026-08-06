@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Anindya Chakraborty</title>
+<meta name="description" content="Anindya Chakraborty — product leader with 15+ years across Amazon, Citi, Bandhan Bank and PwC. MBA, IIM Calcutta.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232563eb'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+
+<script>
+  // Set the theme before first paint: saved choice wins, otherwise follow the OS.
+  // Inline and blocking on purpose — deferring this causes a flash of the wrong theme.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root, [data-theme="light"] {
+    color-scheme: light;
     --bg: #fafafa;
     --bg-card: #ffffff;
     --bg-card-hover: #f8f9fc;
@@ -15,20 +32,16 @@
     --text-muted: #64748b;
     --text-dim: #94a3b8;
     --accent: #2563eb;
-    --accent-2: #0ea5e9;
-    --accent-soft: #2563eb10;
-    --accent-glow: #2563eb06;
     --border: #e2e8f0;
     --border-hover: #cbd5e1;
     --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.03);
-    --card-glow: 0 0 40px rgba(37,99,235,0.06);
-    --noise-opacity: 0.015;
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans: 'DM Sans', system-ui, sans-serif;
     --mono: 'JetBrains Mono', monospace;
   }
 
   [data-theme="dark"] {
+    color-scheme: dark;
     --bg: #09090b;
     --bg-card: #111114;
     --bg-card-hover: #16161a;
@@ -37,18 +50,23 @@
     --text-muted: #8b8fa3;
     --text-dim: #525669;
     --accent: #60a5fa;
-    --accent-2: #38bdf8;
-    --accent-soft: #60a5fa18;
-    --accent-glow: #60a5fa10;
     --border: #1e1e24;
     --border-hover: #2a2a34;
     --card-shadow: none;
-    --card-glow: 0 0 60px rgba(96,165,250,0.05);
-    --noise-opacity: 0.025;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    [data-animate], .reveal { opacity: 1 !important; transform: none !important; }
+  }
 
   body {
     font-family: var(--sans);
@@ -62,116 +80,15 @@
 
   ::selection { background: var(--accent); color: var(--bg); }
 
-  /* === PAGE LOADER === */
-  .page-loader {
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.6s ease, visibility 0.6s ease;
-  }
-
-  .page-loader.done {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .loader-logo {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    color: var(--text);
-    opacity: 0;
-    transform: scale(0.95);
-    animation: loaderReveal 0.8s 0.1s ease forwards;
-  }
-
-  .loader-logo span { color: var(--accent); font-style: italic; }
-
-  @keyframes loaderReveal {
-    to { opacity: 1; transform: scale(1); }
-  }
-
   /* === SCROLL PROGRESS === */
   .scroll-progress {
     position: fixed;
     top: 0; left: 0;
     width: 0%; height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    background: var(--accent);
     z-index: 200;
     transition: width 0.1s linear;
   }
-
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: var(--noise-opacity);
-    pointer-events: none;
-    z-index: 9999;
-    transition: opacity 0.5s;
-  }
-
-  /* === AMBIENT ORBS === */
-  .ambient-wrap {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-
-  .orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.4;
-    transition: background 0.5s;
-  }
-
-  .orb-1 {
-    width: 60vw; height: 60vw;
-    top: -20%; left: -15%;
-    background: var(--accent-glow);
-    animation: orbFloat1 25s ease-in-out infinite alternate;
-  }
-
-  .orb-2 {
-    width: 40vw; height: 40vw;
-    bottom: -10%; right: -10%;
-    background: var(--accent-glow);
-    animation: orbFloat2 20s ease-in-out infinite alternate;
-  }
-
-  @keyframes orbFloat1 {
-    0% { transform: translate(0,0) scale(1); }
-    100% { transform: translate(10vw, 5vh) scale(1.15); }
-  }
-  @keyframes orbFloat2 {
-    0% { transform: translate(0,0) scale(1); }
-    100% { transform: translate(-8vw, -3vh) scale(1.1); }
-  }
-
-  /* === CURSOR GLOW === */
-  .cursor-glow {
-    position: fixed;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  body:hover .cursor-glow { opacity: 1; }
 
   /* Shared transition */
   nav, .hero-title, .hero-sub, .section-label, .section-title,
@@ -231,7 +148,7 @@
     position: absolute;
     bottom: -4px; left: 0;
     width: 0; height: 1px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    background: var(--accent);
     transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
@@ -380,10 +297,7 @@
   .hero-title em {
     font-style: italic;
     font-weight: 300;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent);
   }
 
   .hero-sub {
@@ -430,10 +344,7 @@
 
   .section-title em {
     font-style: italic;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent);
   }
 
   /* === TIMELINE === */
@@ -480,7 +391,6 @@
     width: 7px; height: 7px;
     border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 10px var(--accent-soft);
     transition: transform 0.3s ease;
   }
 
@@ -536,19 +446,7 @@
     overflow: hidden;
   }
 
-  .edu-item::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 4px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-    background: radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--accent-soft), transparent 40%);
-  }
-
-  .edu-item:hover { border-color: var(--border-hover); box-shadow: var(--card-shadow), var(--card-glow); }
-  .edu-item:hover::after { opacity: 1; }
+  .edu-item:hover { border-color: var(--border-hover); box-shadow: var(--card-shadow-hover); }
 
   .edu-degree {
     font-family: var(--serif);
@@ -676,7 +574,7 @@
     position: absolute;
     bottom: -2px; left: 0;
     width: 0; height: 1px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    background: var(--accent);
     transition: width 0.3s ease;
   }
 
@@ -699,28 +597,13 @@
     footer { flex-direction: column; gap: 2rem; }
     .footer-right { text-align: left; }
     .back-link { padding: 4rem 1.5rem 1rem; }
-    .cursor-glow { display: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- PAGE LOADER -->
-<div class="page-loader" id="pageLoader">
-  <div class="loader-logo">A<span>.</span>C</div>
-</div>
-
 <!-- SCROLL PROGRESS -->
 <div class="scroll-progress" id="scrollProgress"></div>
-
-<!-- CURSOR GLOW -->
-<div class="cursor-glow" id="cursorGlow"></div>
-
-<!-- AMBIENT ORBS -->
-<div class="ambient-wrap">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-</div>
 
 <!-- NAV -->
 <nav id="mainNav">
@@ -860,7 +743,7 @@
 <footer>
   <div class="footer-left">
     <div class="footer-name">Anindya Chakraborty</div>
-    <div class="footer-desc">Product leader. Builder. IIM Calcutta.</div>
+    <div class="footer-desc">Product leader. Builder.</div>
   </div>
   <div class="footer-right">
     <div class="footer-links">
@@ -870,7 +753,7 @@
       <a href="https://anindyachakraborty.substack.com/" target="_blank">Substack</a>
       <a href="mailto:anindya.chakraborty@gmail.com">Email</a>
     </div>
-    <div class="footer-copy">&copy; 2025 — Built with care and caffeine</div>
+    <div class="footer-copy">&copy; 2026 Anindya Chakraborty</div>
   </div>
 </footer>
 
@@ -889,13 +772,6 @@
 
   document.querySelector('.theme-toggle').addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); }
-  });
-
-  // === PAGE LOADER ===
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('pageLoader').classList.add('done');
-    }, 600);
   });
 
   // === SCROLL PROGRESS ===
@@ -919,22 +795,6 @@
     }
     lastScroll = currentScroll;
   }, { passive: true });
-
-  // === CURSOR GLOW ===
-  const cursorGlow = document.getElementById('cursorGlow');
-  document.addEventListener('mousemove', (e) => {
-    cursorGlow.style.left = e.clientX + 'px';
-    cursorGlow.style.top = e.clientY + 'px';
-  });
-
-  // === EDUCATION CARD MOUSE TRACKING ===
-  document.querySelectorAll('.edu-item').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
-      card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
-    });
-  });
 
   // === MOBILE MENU ===
   const menuToggle = document.getElementById('menuToggle');
@@ -981,17 +841,6 @@
 
   document.querySelectorAll('[data-animate]').forEach(el => cardObserver.observe(el));
 
-  // === SMOOTH PAGE TRANSITIONS ===
-  document.querySelectorAll('a[href]').forEach(link => {
-    if (link.hostname === window.location.hostname && !link.hash && link.href !== window.location.href) {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.3s ease';
-        setTimeout(() => { window.location = link.href; }, 300);
-      });
-    }
-  });
 </script>
 
 </body>
