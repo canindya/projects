@@ -1,5 +1,24 @@
 # Changelog
 
+## [2026-09-02]
+
+### Changed
+- **Editorial redesign**: Both pages rebuilt as a numbered index — one construction per project (number, serif title, stat line, one paragraph, status/stack line, image frame) on a 12-column grid with 80px margins. Page height down from ~4,470px to ~3,310px
+- **Type system**: Cormorant Garamond + DM Sans 300 replaced with Instrument Serif + Instrument Sans; one display size, one title size, three text sizes
+- **Palette**: Warm paper `#f3f0e9` and ink `#131211` with a single oxblood accent used only for live status and hover; dark mode is a designed warm charcoal rather than an inversion
+- **Screenshots art-directed**: Each source screenshot cropped to one meaningful region (`kolkata-map`, `westbengal-gsdp`, `cost-of-living-map`) and the RemindMe device cut out of its marketing page onto a theme-aware ground
+- **StockPicker**: The "no public build yet" placeholder replaced with a typographic table of the six pipeline stages and their figures
+- **About page**: Rebuilt on the same system — a hairline record of roles with years, titles and outcomes in three columns
+
+### Removed
+- **Decorative furniture**: Scroll-progress bar, hide-on-scroll nav, all entrance/reveal animations, the philosophical pull-quote section, the three-up stat strip, the "scroll to explore" affordance, the pill button, and the bordered project cards
+- **Italic accent headlines**: The blue italic accent word in "end to *end*", "Selected *works*" and "Finance, Function, *Fiction*"
+- **Uppercase monospace micro-labels**: Nine instances reduced to one status/stack line per project
+
+### Fixed
+- **Image aspect ratios**: Intrinsic `height` attributes were overriding `aspect-ratio`, so every project frame rendered at its source height instead of one shared 3:2 ratio
+- **Copy**: "Tobaco" and "one of top 10 banks" in the TCS entry
+
 ## [2026-08-07]
 
 ### Added

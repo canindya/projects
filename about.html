@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Anindya Chakraborty</title>
-<meta name="description" content="Anindya Chakraborty — product leader with 15+ years across Amazon, Citi, Bandhan Bank and PwC. MBA, IIM Calcutta.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232563eb'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
-<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Anindya Chakraborty: product leader with 15+ years across banking, fintech and technology — PwC, Amazon, Citi, Bandhan Bank, TCS. MBA, IIM Calcutta.">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="About — Anindya Chakraborty">
+<meta property="og:description" content="Product leader with 15+ years across banking, fintech and technology. Now building independently.">
+<meta property="og:url" content="https://canindya.github.io/projects/about.html">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1917'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23e8e4db' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#f3f0e9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1917" media="(prefers-color-scheme: dark)">
 
 <script>
   // Set the theme before first paint: saved choice wins, otherwise follow the OS.
@@ -20,827 +26,399 @@
   })();
 </script>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
+  /* Same tokens and same rules as the index — one system across two pages. */
   :root, [data-theme="light"] {
     color-scheme: light;
-    --bg: #fafafa;
-    --bg-card: #ffffff;
-    --bg-card-hover: #f8f9fc;
-    --bg-nav: #fafafadd;
-    --text: #0f0f0f;
-    --text-muted: #64748b;
-    --text-dim: #94a3b8;
-    --accent: #2563eb;
-    --border: #e2e8f0;
-    --border-hover: #cbd5e1;
-    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.03);
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-    --mono: 'JetBrains Mono', monospace;
+    --paper: #f3f0e9;
+    --ink: #131211;
+    --ink-mid: #6b675e;
+    --ink-body: #3a3833;
+    --rule: rgba(19, 18, 17, 0.08);
+    --accent: #8c2f24;
   }
 
   [data-theme="dark"] {
     color-scheme: dark;
-    --bg: #09090b;
-    --bg-card: #111114;
-    --bg-card-hover: #16161a;
-    --bg-nav: #09090bcc;
-    --text: #f0f0f0;
-    --text-muted: #8b8fa3;
-    --text-dim: #525669;
-    --accent: #60a5fa;
-    --border: #1e1e24;
-    --border-hover: #2a2a34;
-    --card-shadow: none;
+    --paper: #1b1917;
+    --ink: #e8e4db;
+    --ink-mid: #8f8a80;
+    --ink-body: #c6c1b6;
+    --rule: rgba(232, 228, 219, 0.12);
+    --accent: #e0876a;
+  }
+
+  :root {
+    --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+    --sans: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+    --margin: 6rem;
+    --gap: 1.5rem;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-    [data-animate], .reveal { opacity: 1 !important; transform: none !important; }
-  }
+  html { -webkit-text-size-adjust: 100%; }
 
   body {
     font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    overflow-x: hidden;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    background: var(--paper);
+    color: var(--ink-mid);
     -webkit-font-smoothing: antialiased;
-    transition: background 0.5s ease, color 0.5s ease;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  ::selection { background: var(--accent); color: var(--bg); }
+  ::selection { background: var(--ink); color: var(--paper); }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
-  /* === SCROLL PROGRESS === */
-  .scroll-progress {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0%; height: 2px;
-    background: var(--accent);
-    z-index: 200;
-    transition: width 0.1s linear;
-  }
+  .shell { padding-inline: var(--margin); }
 
-  /* Shared transition */
-  nav, .hero-title, .hero-sub, .section-label, .section-title,
-  .role-card, .role-org, .role-title, .role-period, .role-desc,
-  .timeline-line, .edu-item, .footer-left .footer-name,
-  .footer-left .footer-desc, .footer-copy, .footer-links a {
-    transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
-  }
+  .label { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
 
-  /* === NAV === */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.2rem 3rem;
+  header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: var(--bg-nav);
-    border-bottom: 1px solid var(--border);
-    transform: translateY(0);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s, border-color 0.5s;
-  }
-
-  nav.nav-hidden { transform: translateY(-100%); }
-
-  .nav-left { display: flex; align-items: center; }
-
-  .nav-logo {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    color: var(--text);
-    text-decoration: none;
-  }
-
-  .nav-logo span { color: var(--accent); font-style: italic; }
-  .nav-right { display: flex; align-items: center; gap: 2.5rem; }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-
-  .nav-links a {
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-decoration: none;
-    position: relative;
-    transition: color 0.3s;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 1px;
-    background: var(--accent);
-    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .nav-links a:hover { color: var(--text); }
-  .nav-links a:hover::after { width: 100%; }
-
-  /* === MOBILE MENU === */
-  .menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 4px;
-    z-index: 110;
-  }
-
-  .menu-toggle span {
-    display: block;
-    width: 20px; height: 1.5px;
-    background: var(--text);
-    transition: all 0.3s ease;
-    transform-origin: center;
-  }
-
-  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
-  .menu-toggle.active span:nth-child(2) { opacity: 0; }
-  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
-
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 99;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-  }
-
-  .mobile-menu.open { opacity: 1; visibility: visible; }
-
-  .mobile-menu a {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 300;
-    color: var(--text);
-    text-decoration: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s;
-  }
-
-  .mobile-menu.open a { opacity: 1; transform: translateY(0); }
-  .mobile-menu.open a:nth-child(1) { transition-delay: 0.1s; }
-  .mobile-menu.open a:nth-child(2) { transition-delay: 0.15s; }
-  .mobile-menu.open a:nth-child(3) { transition-delay: 0.2s; }
-  .mobile-menu.open a:nth-child(4) { transition-delay: 0.25s; }
-  .mobile-menu a:hover { color: var(--accent); }
-
-  /* === THEME TOGGLE === */
-  .theme-toggle {
-    position: relative;
-    width: 52px; height: 26px;
-    background: var(--border);
-    border-radius: 13px;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    transition: all 0.4s ease;
-    flex-shrink: 0;
-  }
-
-  .theme-toggle:hover { border-color: var(--accent); }
-
-  .theme-toggle-knob {
-    position: absolute;
-    top: 3px; left: 3px;
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    background: var(--accent);
-    transition: transform 0.4s cubic-bezier(0.68, -0.15, 0.27, 1.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  [data-theme="dark"] .theme-toggle-knob { transform: translateX(26px); }
-
-  .theme-toggle-knob svg {
-    width: 10px; height: 10px;
-    fill: none; stroke: white;
-    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-  }
-
-  [data-theme="light"] .theme-toggle-knob svg { stroke: #fafafa; }
-  [data-theme="light"] .toggle-moon { display: none; }
-  [data-theme="dark"] .toggle-sun { display: none; }
-
-  /* === REVEAL ANIMATIONS === */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* === HERO === */
-  .hero {
-    padding: 10rem 3rem 5rem;
-    position: relative;
-    z-index: 1;
-    max-width: 800px;
-  }
-
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeSlideUp 1s 0.8s ease forwards;
-  }
-
-  .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeSlideUp 1.2s 1s ease forwards;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--accent);
-  }
-
-  .hero-sub {
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.9;
-    max-width: 620px;
-    opacity: 0;
-    animation: fadeSlideUp 1s 1.3s ease forwards;
-  }
-
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* === SECTIONS === */
-  section {
-    position: relative;
-    z-index: 1;
-    padding: 5rem 3rem;
-    max-width: 800px;
-  }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 300;
-    color: var(--text);
-    margin-bottom: 3rem;
-    line-height: 1.15;
-  }
-
-  .section-title em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  /* === TIMELINE === */
-  .timeline {
-    position: relative;
-    padding-left: 2.5rem;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 1px; height: 100%;
-    background: linear-gradient(180deg, var(--accent), var(--border), var(--border));
-    transition: background 0.5s;
-  }
-
-  .role-card {
-    position: relative;
-    margin-bottom: 3rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid var(--border);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s;
-  }
-
-  .role-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .role-card:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-  }
-
-  .role-card::before {
-    content: '';
-    position: absolute;
-    left: -2.5rem;
-    top: 0.5rem;
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-    transition: transform 0.3s ease;
-  }
-
-  .role-card:hover::before { transform: scale(1.5); }
-
-  .role-org {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--text);
-    margin-bottom: 0.25rem;
-  }
-
-  .role-title {
-    font-size: 0.85rem;
-    color: var(--accent);
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    margin-bottom: 0.4rem;
-  }
-
-  .role-period {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 1.2rem;
-  }
-
-  .role-desc {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.8;
-  }
-
-  /* === EDUCATION === */
-  .edu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    padding: 1.25rem var(--margin);
   }
 
-  .edu-item {
-    padding: 2rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    background: var(--bg-card);
-    box-shadow: var(--card-shadow);
-    transition: all 0.4s;
-    position: relative;
-    overflow: hidden;
-  }
+  .wordmark { color: var(--ink); text-decoration: none; white-space: nowrap; }
 
-  .edu-item:hover { border-color: var(--border-hover); box-shadow: var(--card-shadow-hover); }
+  .header-end { display: flex; align-items: baseline; gap: 1.75rem; }
+  .header-end .theme-btn { margin-left: 1.5rem; }
+  .header-end a, .header-end button { color: var(--ink-mid); }
+  .header-end a { text-decoration: none; text-underline-offset: 0.45em; text-decoration-thickness: 1px; }
+  .header-end a:hover, .header-end button:hover { color: var(--ink); }
+  .header-end a[aria-current="page"] { color: var(--ink); text-decoration: underline; }
 
-  .edu-degree {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: var(--text);
-    margin-bottom: 0.3rem;
-  }
-
-  .edu-school {
-    font-size: 0.85rem;
-    color: var(--accent);
-    font-weight: 400;
-    margin-bottom: 0.3rem;
-  }
-
-  .edu-year {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
+  .theme-btn {
+    font: inherit;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--text-dim);
+    background: none; border: 0; padding: 0;
+    cursor: pointer;
   }
 
-  /* === EXTRAS === */
-  .extras-grid {
+  [data-theme="light"] .theme-btn::after { content: 'Dark'; }
+  [data-theme="dark"] .theme-btn::after { content: 'Light'; }
+
+  /* === INTRO === */
+  .intro {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    max-width: 100%;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--gap);
+    align-items: start;
+    padding-block: clamp(2.5rem, 5vw, 4rem) clamp(4rem, 7vw, 6rem);
   }
 
-  .extra-cell {
-    padding: 2.5rem 2rem;
-    border-right: 1px solid var(--border);
-    transition: background 0.4s;
-  }
-
-  .extra-cell:last-child { border-right: none; }
-  .extra-cell:hover { background: var(--bg-card); }
-
-  .extra-label {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 0.75rem;
-    transition: color 0.5s;
-  }
-
-  .extra-value {
-    font-size: 0.85rem;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.6;
-    transition: color 0.5s;
-  }
-
-  /* === BACK LINK === */
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.75rem;
+  .intro h1 {
+    grid-column: 1 / 7;
+    font-family: var(--serif);
     font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    padding: 5rem 3rem 2rem;
-    position: relative;
-    z-index: 1;
-    transition: gap 0.3s;
+    font-size: clamp(3rem, 6.6vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-left: -0.02em;
   }
 
-  .back-link:hover { gap: 1.2rem; }
+  .intro .bio { grid-column: 7 / 13; font-size: 1.0625rem; line-height: 1.6; color: var(--ink-body); }
+  .intro .bio p + p { margin-top: 1rem; }
 
-  .back-link svg {
-    width: 16px; height: 16px;
-    stroke: currentColor;
-    transition: transform 0.3s;
+  /* === RECORD === */
+  .section { padding-top: clamp(3rem, 5vw, 4rem); }
+  .section > .label { color: var(--ink-mid); margin-bottom: 1.25rem; }
+
+  .rows { list-style: none; border-top: 1px solid var(--rule); }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--gap);
+    align-items: baseline;
+    padding-block: 1.75rem;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .back-link:hover svg { transform: translateX(-3px); }
+  .row .years { grid-column: 1 / 3; color: var(--ink-mid); font-variant-numeric: tabular-nums lining-nums; }
+  .row .who { grid-column: 3 / 7; }
+  .row .what { grid-column: 7 / 13; color: var(--ink-body); font-size: 1rem; line-height: 1.6; }
+
+  .row h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.75rem;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  .row .role { margin-top: 0.35rem; color: var(--ink-mid); }
+
+  /* === NOTES === */
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--gap);
+    row-gap: 2.5rem;
+    padding-block: clamp(3rem, 5vw, 4rem);
+    border-top: 1px solid var(--rule);
+    margin-top: clamp(3rem, 5vw, 4rem);
+  }
+
+  .note { grid-column: span 4; }
+  .note .label { color: var(--ink-mid); margin-bottom: 0.75rem; }
+  .note p { font-size: 1rem; line-height: 1.6; color: var(--ink-body); }
 
   /* === FOOTER === */
-  footer {
-    padding: 4rem 3rem;
+  footer { padding-top: clamp(4rem, 7vw, 6rem); padding-bottom: 2.5rem; }
+
+  .footer-top {
     display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
     justify-content: space-between;
-    align-items: end;
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid var(--border);
-    margin-top: 4rem;
+    gap: 1.5rem 3rem;
   }
 
-  .footer-left .footer-name {
+  .footer-top a.mail {
     font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin-bottom: 0.5rem;
-  }
-
-  .footer-left .footer-desc { font-size: 0.8rem; color: var(--text-dim); font-weight: 300; }
-  .footer-right { text-align: right; }
-  .footer-links { display: flex; gap: 2rem; margin-bottom: 0.75rem; }
-
-  .footer-links a {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-dim);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    letter-spacing: -0.02em;
+    color: var(--ink);
     text-decoration: none;
-    transition: color 0.3s;
-    position: relative;
   }
 
-  .footer-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px; left: 0;
-    width: 0; height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
+  .footer-top a.mail:hover { color: var(--accent); }
+  .footer-top nav { display: flex; flex-wrap: wrap; gap: 1.75rem; color: var(--ink-mid); }
+  .footer-top nav a { text-decoration: none; text-underline-offset: 0.45em; text-decoration-thickness: 1px; }
+  .footer-top nav a:hover { color: var(--ink); text-decoration: underline; }
+
+  .footer-end {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-mid);
   }
 
-  .footer-links a:hover { color: var(--accent); }
-  .footer-links a:hover::after { width: 100%; }
-  .footer-copy { font-size: 0.7rem; color: var(--text-dim); opacity: 0.5; }
+  @media (max-width: 1080px) {
+    :root { --margin: 2.5rem; }
+    .intro h1 { grid-column: 1 / 13; }
+    .intro .bio { grid-column: 1 / 10; margin-top: 2rem; }
+    .row .years { grid-column: 1 / 3; }
+    .row .who { grid-column: 3 / 13; }
+    .row .what { grid-column: 3 / 13; margin-top: 0.75rem; }
+    .note { grid-column: span 6; }
+  }
 
-  /* === RESPONSIVE === */
-  @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    .menu-toggle { display: flex; }
-    .mobile-menu { display: flex; }
-    .hero { padding: 8rem 1.5rem 3rem; }
-    section { padding: 3rem 1.5rem; }
-    .edu-grid { grid-template-columns: 1fr; }
-    .extras-grid { grid-template-columns: 1fr; }
-    .extra-cell { border-right: none; border-bottom: 1px solid var(--border); }
-    .extra-cell:last-child { border-bottom: none; }
-    footer { flex-direction: column; gap: 2rem; }
-    .footer-right { text-align: left; }
-    .back-link { padding: 4rem 1.5rem 1rem; }
+  @media (max-width: 640px) {
+    :root { --margin: 1.25rem; --gap: 0.75rem; }
+    header { padding-block: 1rem; }
+    .header-end { gap: 1.1rem; }
+    .intro h1 { font-size: 2.75rem; }
+    .row .years, .row .who, .row .what { grid-column: 1 / 13; }
+    .row .who { margin-top: 0.5rem; }
+    .note { grid-column: 1 / 13; }
+    .footer-top { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 
-<!-- SCROLL PROGRESS -->
-<div class="scroll-progress" id="scrollProgress"></div>
-
-<!-- NAV -->
-<nav id="mainNav">
-  <div class="nav-left">
-    <a href="index.html" class="nav-logo">A<span>.</span>C</a>
+<header>
+  <a class="wordmark label" href="./">Anindya Chakraborty</a>
+  <div class="header-end">
+    <a class="label" href="./#work">Work</a>
+    <a class="label" href="https://anindyachakraborty.substack.com/" target="_blank" rel="noopener">Essays</a>
+    <a class="label" href="about.html" aria-current="page">About</a>
+    <button class="theme-btn" type="button" onclick="toggleTheme()" aria-label="Switch colour theme"></button>
   </div>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="index.html#projects">Projects</a></li>
-      <li><a href="index.html#writing">Writings</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-    <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme" tabindex="0">
-      <div class="theme-toggle-knob">
-        <svg class="toggle-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg class="toggle-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </div>
+</header>
+
+<main>
+
+  <section class="intro shell">
+    <h1>Fifteen years<br>of shipping.</h1>
+    <div class="bio">
+      <p>
+        Product leader working at the intersection of banking, fintech and technology.
+        MBA from IIM Calcutta, Computer Science from Kalyani University. Programs worth
+        $150M+ across Amazon, Citi, PwC and Bandhan Bank — from payments infrastructure
+        processing millions of daily transactions to API monetisation strategies that
+        unlocked new revenue.
+      </p>
+      <p>
+        That domain depth now goes into building products independently: sourcing the
+        data, writing the pipeline, building the interface, shipping it.
+      </p>
     </div>
-    <div class="menu-toggle" id="menuToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
+  </section>
+
+  <section class="section shell">
+    <div class="label">Where I&rsquo;ve built</div>
+    <ol class="rows">
+
+      <li class="row">
+        <div class="years label">2023 &ndash; now</div>
+        <div class="who">
+          <h3>PwC</h3>
+          <div class="role">Associate Director, Business Transformation</div>
+        </div>
+        <div class="what">
+          Multi-year roadmaps for mobility and sales-enablement products used by 2,500+
+          people daily. Drove an Open API monetisation strategy across 400+ APIs,
+          unlocking $6M of new income for a major bank. Published fintech white papers
+          referenced by the C-suite in strategic planning.
+        </div>
+      </li>
+
+      <li class="row">
+        <div class="years label">2022 &ndash; 2023</div>
+        <div class="who">
+          <h3>Amazon</h3>
+          <div class="role">Head of Account Management, Global Selling</div>
+        </div>
+        <div class="what">
+          Led the Global Selling function driving $150M+ in gross merchandise sales at
+          60% year-on-year growth. Secured budget for new regional programs, and
+          neutralised a regulatory threat to $1B of seller revenue by mobilising
+          cross-regional teams — retention held above 95%.
+        </div>
+      </li>
+
+      <li class="row">
+        <div class="years label">2021 &ndash; 2022</div>
+        <div class="who">
+          <h3>PwC</h3>
+          <div class="role">Associate Director, Business Transformation</div>
+        </div>
+        <div class="what">
+          Open API implementations for three banks at 250+ TPS and 99.5% uptime.
+          Integrated 25+ partners into core banking via microservices, onboarding a
+          million retail customers to digital channels. Full P&amp;L ownership across
+          $21M of programs.
+        </div>
+      </li>
+
+      <li class="row">
+        <div class="years label">2019 &ndash; 2021</div>
+        <div class="who">
+          <h3>Bandhan Bank</h3>
+          <div class="role">Deputy Vice President, IT</div>
+        </div>
+        <div class="what">
+          Launched a mobile micro-banking platform handling 1.8M daily transactions
+          across 24,000 field staff. Founded the IT PMO from scratch — hired and
+          mentored six product managers to deliver org-wide transformation programs.
+        </div>
+      </li>
+
+      <li class="row">
+        <div class="years label">2017 &ndash; 2018</div>
+        <div class="who">
+          <h3>Citi</h3>
+          <div class="role">Assistant Vice President, Trade &amp; Treasury</div>
+        </div>
+        <div class="what">
+          Deployed SWIFT GPI across Asia and Latin America with four cross-functional
+          teams, cutting cross-border payment tracking calls by 80%. Managed the annual
+          program budget with full P&amp;L accountability.
+        </div>
+      </li>
+
+      <li class="row">
+        <div class="years label">2003 &ndash; 2016</div>
+        <div class="who">
+          <h3>TCS</h3>
+          <div class="role">Assistant Consultant</div>
+        </div>
+        <div class="what">
+          Where it started. B2B products for a tobacco company&rsquo;s field sales force,
+          the first agile initiative at one of the world&rsquo;s top ten banks — worth $1M
+          in savings — and a B2B2C platform built on AWS from scratch. Thirteen years of
+          shipping across industries.
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <section class="section shell">
+    <div class="label">Foundations</div>
+    <ol class="rows">
+      <li class="row">
+        <div class="years label">2016 &ndash; 2017</div>
+        <div class="who">
+          <h3>IIM Calcutta</h3>
+          <div class="role">MBA</div>
+        </div>
+        <div class="what"></div>
+      </li>
+      <li class="row">
+        <div class="years label">1999 &ndash; 2003</div>
+        <div class="who">
+          <h3>Kalyani University</h3>
+          <div class="role">B.Tech, Computer Science</div>
+        </div>
+        <div class="what"></div>
+      </li>
+    </ol>
+  </section>
+
+  <div class="notes shell">
+    <div class="note">
+      <div class="label">Beyond work</div>
+      <p>Exhibited photographer in Kolkata and New York. Reads 50+ books a year. Movie buff.</p>
+    </div>
+    <div class="note">
+      <div class="label">Pro bono</div>
+      <p>Startup mentor at ATF Labs — India&rsquo;s first assistive technology accelerator, supporting disability-focused startups.</p>
+    </div>
+    <div class="note">
+      <div class="label">Hands on with</div>
+      <p>Python, SQL, APIs, cloud architecture and system design. Lean Six Sigma Green Belt.</p>
     </div>
   </div>
-</nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#projects" onclick="closeMenu()">Projects</a>
-  <a href="index.html#writing" onclick="closeMenu()">Writings</a>
-  <a href="about.html">About</a>
-  <a href="index.html#contact" onclick="closeMenu()">Contact</a>
-</div>
+</main>
 
-<!-- BACK -->
-<a href="index.html" class="back-link">
-  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-  Back to projects
-</a>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-eyebrow">About</div>
-  <h1 class="hero-title">Anindya <em>Chakraborty</em></h1>
-  <p class="hero-sub">
-    Product leader with 15+ years building at the intersection of banking, fintech, and technology. MBA from IIM Calcutta, Computer Science from Kalyani University. Led programs worth $150M+ across Amazon, Citi, PwC, and Bandhan Bank — from payments infrastructure processing millions of daily transactions to API monetization strategies unlocking new revenue. Now channelling that domain depth into building products independently, one AI-augmented builder at a time.
-  </p>
-</section>
-
-<!-- JOURNEY -->
-<section>
-  <div class="section-label reveal">Journey</div>
-  <h2 class="section-title reveal">Where I've <em>built</em></h2>
-
-  <div class="timeline">
-
-    <div class="role-card" data-animate>
-      <div class="role-org">PwC</div>
-      <div class="role-title">Associate Director, Business Transformation</div>
-      <div class="role-period">2023 — Present</div>
-      <div class="role-desc">Owning multi-year roadmaps for mobility and sales enablement products impacting 2,500+ daily users. Drove Open API monetization strategy evaluating 400+ APIs to unlock $6M in new income for a major bank. Published fintech white papers referenced by C-suite for strategic planning.</div>
-    </div>
-
-    <div class="role-card" data-animate>
-      <div class="role-org">Amazon</div>
-      <div class="role-title">Head of Account Management, Global Selling</div>
-      <div class="role-period">2022 — 2023</div>
-      <div class="role-desc">Led the Global Selling function driving $150+ M GMS with 60% YoY growth. Secured budget for new regional programs. Neutralized a regulatory threat to $1B in seller revenue by mobilizing cross-regional teams and preserving 95%+ retention.</div>
-    </div>
-
-    <div class="role-card" data-animate>
-      <div class="role-org">PwC</div>
-      <div class="role-title">Associate Director, Business Transformation</div>
-      <div class="role-period">2021 — 2022</div>
-      <div class="role-desc">Delivered Open API implementations for 3 banks — 250+ TPS, 99.5% uptime. Integrated 25+ partners into core banking via microservices, onboarding 1M retail customers to digital channels. Full P&L ownership across $21M in programs.</div>
-    </div>
-
-    <div class="role-card" data-animate>
-      <div class="role-org">Bandhan Bank</div>
-      <div class="role-title">Deputy Vice President, IT</div>
-      <div class="role-period">2019 — 2021</div>
-      <div class="role-desc">Launched a mobile micro-banking platform handling 1.8M daily transactions across 24K field staff. Founded the IT PMO from scratch — hired and mentored 6 PMs to deliver org-wide transformation programs.</div>
-    </div>
-
-    <div class="role-card" data-animate>
-      <div class="role-org">Citi</div>
-      <div class="role-title">Assistant Vice President, Trade & Treasury</div>
-      <div class="role-period">2017 — 2018</div>
-      <div class="role-desc">Deployed SWIFT GPI across Asia and LATAM with 4 cross-functional teams — cut cross-border payment tracking calls by 80%. Managed annual program budget with full P&L accountability.</div>
-    </div>
-
-    <div class="role-card" data-animate>
-      <div class="role-org">TCS</div>
-      <div class="role-title">Assistant Consultant</div>
-      <div class="role-period">2003 — 2016</div>
-      <div class="role-desc">Where it all started. Launched B2B products for Salespeople for Tobaco company, implemented first agile initiative delivering $1M in savings for the one of top 10 banks in the world, and built a B2B2C platform on AWS from scratch. 10+ years of shipping across industries.</div>
-    </div>
-
+<footer class="shell">
+  <div class="footer-top">
+    <a class="mail" href="mailto:anindya.chakraborty@gmail.com">anindya.chakraborty@gmail.com</a>
+    <nav class="label">
+      <a href="./#work">Work</a>
+      <a href="https://anindyachakraborty.substack.com/" target="_blank" rel="noopener">Substack</a>
+      <a href="https://www.linkedin.com/in/anindya-chakraborty/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/canindya" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://x.com/NtellShow" target="_blank" rel="noopener">X</a>
+    </nav>
   </div>
-</section>
-
-<!-- EDUCATION -->
-<section>
-  <div class="section-label reveal">Education</div>
-  <h2 class="section-title reveal">Foundations</h2>
-
-  <div class="edu-grid reveal">
-    <div class="edu-item">
-      <div class="edu-degree">MBA</div>
-      <div class="edu-school">IIM Calcutta</div>
-      <div class="edu-year">2016 — 2017</div>
-    </div>
-    <div class="edu-item">
-      <div class="edu-degree">B.Tech — Computer Science</div>
-      <div class="edu-school">Kalyani University</div>
-      <div class="edu-year">1999 — 2003</div>
-    </div>
-  </div>
-</section>
-
-<!-- EXTRAS -->
-<div class="extras-grid reveal">
-  <div class="extra-cell">
-    <div class="extra-label">Beyond Work</div>
-    <div class="extra-value">Exhibited photographer in Kolkata and New York. Reads 50+ books a year. Movie buff.</div>
-  </div>
-  <div class="extra-cell">
-    <div class="extra-label">Pro Bono</div>
-    <div class="extra-value">Startup mentor at ATF Labs — India's first assistive technology accelerator supporting disability-focused startups.</div>
-  </div>
-  <div class="extra-cell">
-    <div class="extra-label">Certifications</div>
-    <div class="extra-value">Lean Six Sigma Green Belt. Hands-on with Python, SQL, APIs, cloud architecture, and system design.</div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-left">
-    <div class="footer-name">Anindya Chakraborty</div>
-    <div class="footer-desc">Product leader. Builder.</div>
-  </div>
-  <div class="footer-right">
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/anindya-chakraborty/" target="_blank">LinkedIn</a>
-      <a href="https://github.com/canindya" target="_blank">GitHub</a>
-      <a href="https://x.com/NtellShow" target="_blank">X</a>
-      <a href="https://anindyachakraborty.substack.com/" target="_blank">Substack</a>
-      <a href="mailto:anindya.chakraborty@gmail.com">Email</a>
-    </div>
-    <div class="footer-copy">&copy; 2026 Anindya Chakraborty</div>
+  <div class="footer-end label">
+    <span>Kolkata, India</span>
   </div>
 </footer>
 
 <script>
+  // Theme toggle. The initial theme is set by the blocking script in <head>.
   function toggleTheme() {
-    const html = document.documentElement;
-    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    var html = document.documentElement;
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch(e) {}
+    try { localStorage.setItem('theme', next); } catch (e) {}
   }
-
-  try {
-    const saved = localStorage.getItem('theme');
-    if (saved) document.documentElement.setAttribute('data-theme', saved);
-  } catch(e) {}
-
-  document.querySelector('.theme-toggle').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); }
-  });
-
-  // === SCROLL PROGRESS ===
-  window.addEventListener('scroll', () => {
-    const scrollTop = document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const progress = (scrollTop / scrollHeight) * 100;
-    document.getElementById('scrollProgress').style.width = progress + '%';
-  }, { passive: true });
-
-  // === SMART NAV ===
-  let lastScroll = 0;
-  const nav = document.getElementById('mainNav');
-
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-    if (currentScroll > lastScroll && currentScroll > 100) {
-      nav.classList.add('nav-hidden');
-    } else {
-      nav.classList.remove('nav-hidden');
-    }
-    lastScroll = currentScroll;
-  }, { passive: true });
-
-  // === MOBILE MENU ===
-  const menuToggle = document.getElementById('menuToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  function closeMenu() {
-    menuToggle.classList.remove('active');
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  menuToggle.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.contains('open');
-    if (isOpen) {
-      closeMenu();
-    } else {
-      menuToggle.classList.add('active');
-      mobileMenu.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-  });
-
-  // === REVEAL OBSERVER ===
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  // === TIMELINE CARD ANIMATIONS ===
-  const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => { entry.target.classList.add('visible'); }, i * 100);
-        cardObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('[data-animate]').forEach(el => cardObserver.observe(el));
-
 </script>
 
 </body>

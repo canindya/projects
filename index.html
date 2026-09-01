@@ -16,9 +16,9 @@
 <meta name="twitter:description" content="Open-data dashboards, a global cost-of-living tracker, an equity screening pipeline, and an Android medication reminder. Built end to end.">
 <meta name="twitter:image" content="https://canindya.github.io/projects/assets/kolkata-dashboard.jpg">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232563eb'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
-<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23171614'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23e8e4db' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#f3f0e9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171614" media="(prefers-color-scheme: dark)">
 
 <script>
   // Set the theme before first paint: saved choice wins, otherwise follow the OS.
@@ -31,1203 +31,463 @@
   })();
 </script>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  /* === LIGHT THEME (default) === */
+  /* ===================================================================
+     TOKENS
+     Paper, ink, one mid-tone, one hairline weight used everywhere,
+     one accent that only marks a live thing or a hover.
+     =================================================================== */
   :root, [data-theme="light"] {
     color-scheme: light;
-    --bg: #fafafa;
-    --bg-card: #ffffff;
-    --bg-card-hover: #f8f9fc;
-    --bg-nav: #fafafadd;
-    --text: #0f0f0f;
-    --text-muted: #64748b;
-    --text-dim: #94a3b8;
-    --accent: #2563eb;
-    --border: #e2e8f0;
-    --border-hover: #cbd5e1;
-    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.03);
-    --card-shadow-hover: 0 4px 12px rgba(37,99,235,0.08), 0 12px 40px rgba(0,0,0,0.06);
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-    --mono: 'JetBrains Mono', monospace;
+    --paper: #f3f0e9;
+    --ink: #131211;
+    --ink-mid: #6b675e;
+    --ink-body: #3a3833;
+    --rule: rgba(19, 18, 17, 0.08);
+    --accent: #8c2f24;
   }
 
-  /* === DARK THEME === */
   [data-theme="dark"] {
     color-scheme: dark;
-    --bg: #09090b;
-    --bg-card: #111114;
-    --bg-card-hover: #16161a;
-    --bg-nav: #09090bcc;
-    --text: #f0f0f0;
-    --text-muted: #8b8fa3;
-    --text-dim: #525669;
-    --accent: #60a5fa;
-    --border: #1e1e24;
-    --border-hover: #2a2a34;
-    --card-shadow: none;
-    --card-shadow-hover: 0 4px 20px rgba(96,165,250,0.06);
+    --paper: #1b1917;
+    --ink: #e8e4db;
+    --ink-mid: #8f8a80;
+    --ink-body: #c6c1b6;
+    --rule: rgba(232, 228, 219, 0.12);
+    --accent: #e0876a;
+  }
+
+  :root {
+    --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+    --sans: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+    --margin: 6rem;
+    --gap: 1.5rem;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-    [data-animate], .reveal { opacity: 1 !important; transform: none !important; }
-  }
+  html { -webkit-text-size-adjust: 100%; }
 
   body {
     font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    overflow-x: hidden;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    background: var(--paper);
+    color: var(--ink-mid);
     -webkit-font-smoothing: antialiased;
-    transition: background 0.5s ease, color 0.5s ease;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  ::selection { background: var(--accent); color: var(--bg); }
+  ::selection { background: var(--ink); color: var(--paper); }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
-  /* === SCROLL PROGRESS === */
-  .scroll-progress {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0%; height: 2px;
-    background: var(--accent);
-    z-index: 200;
-    transition: width 0.1s linear;
+  .shell { padding-inline: var(--margin); }
+
+  /* One label style, used for the index numbers, the meta lines, the nav
+     and the footer. Everything else is either the serif or body copy. */
+  .label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
-  /* === GLOBAL TRANSITIONS === */
-  nav, .project-card, .about-cell, .philosophy blockquote,
-  .philosophy .attribution, .footer-left .footer-name, .footer-left .footer-desc,
-  .footer-copy, .section-label, .section-title, .hero-title, .hero-sub,
-  .project-card h3, .featured-body h3, .project-desc, .project-lede,
-  .project-facts, .fact-num, .fact-label, .project-eyebrow,
-  .about-cell .stat, .about-cell .stat-label, .about-cell .stat-desc, .tag,
-  .footer-links a {
-    transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
-  }
-
-  /* === NAVIGATION === */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.2rem 3rem;
+  /* ===================================================================
+     HEADER
+     =================================================================== */
+  header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: var(--bg-nav);
-    border-bottom: 1px solid var(--border);
-    transform: translateY(0);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s, border-color 0.5s;
+    gap: 2rem;
+    padding: 1.25rem var(--margin);
   }
 
-  nav.nav-hidden { transform: translateY(-100%); }
+  .wordmark { color: var(--ink); text-decoration: none; white-space: nowrap; }
 
-  .nav-left { display: flex; align-items: center; }
+  .header-end { display: flex; align-items: baseline; gap: 1.75rem; }
+  .header-end .theme-btn { margin-left: 1.5rem; }
+  .header-end a, .header-end button { color: var(--ink-mid); }
+  .header-end a { text-decoration: none; text-underline-offset: 0.45em; text-decoration-thickness: 1px; }
+  .header-end a:hover, .header-end button:hover { color: var(--ink); }
+  .header-end a[aria-current="page"] { color: var(--ink); text-decoration: underline; }
 
-  .nav-logo {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    color: var(--text);
-    text-decoration: none;
-  }
-
-  .nav-logo span { color: var(--accent); font-style: italic; }
-
-  .nav-right { display: flex; align-items: center; gap: 2.5rem; }
-
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-
-  .nav-links a {
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
+  .theme-btn {
+    font: inherit;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    text-decoration: none;
-    position: relative;
-    transition: color 0.3s;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 1px;
-    background: var(--accent);
-    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .nav-links a:hover { color: var(--text); }
-  .nav-links a:hover::after { width: 100%; }
-
-  /* === MOBILE MENU === */
-  .menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
+    background: none;
+    border: 0;
+    padding: 0;
     cursor: pointer;
-    padding: 4px;
-    z-index: 110;
   }
 
-  .menu-toggle span {
-    display: block;
-    width: 20px; height: 1.5px;
-    background: var(--text);
-    transition: all 0.3s ease;
-    transform-origin: center;
-  }
+  [data-theme="light"] .theme-btn::after { content: 'Dark'; }
+  [data-theme="dark"] .theme-btn::after { content: 'Light'; }
 
-  .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
-  .menu-toggle.active span:nth-child(2) { opacity: 0; }
-  .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+  /* ===================================================================
+     HERO
+     =================================================================== */
+  .hero { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
 
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 99;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-  }
-
-  .mobile-menu.open { opacity: 1; visibility: visible; }
-
-  .mobile-menu a {
+  .hero h1 {
     font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 300;
-    color: var(--text);
-    text-decoration: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s;
-  }
-
-  .mobile-menu.open a {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .mobile-menu.open a:nth-child(1) { transition-delay: 0.1s; }
-  .mobile-menu.open a:nth-child(2) { transition-delay: 0.15s; }
-  .mobile-menu.open a:nth-child(3) { transition-delay: 0.2s; }
-  .mobile-menu.open a:nth-child(4) { transition-delay: 0.25s; }
-
-  .mobile-menu a:hover { color: var(--accent); }
-
-  /* === THEME TOGGLE === */
-  .theme-toggle {
-    position: relative;
-    width: 52px;
-    height: 26px;
-    background: var(--border);
-    border-radius: 13px;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    transition: all 0.4s ease;
-    flex-shrink: 0;
-  }
-
-  .theme-toggle:hover { border-color: var(--accent); }
-
-  .theme-toggle-knob {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--accent);
-    transition: transform 0.4s cubic-bezier(0.68, -0.15, 0.27, 1.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  [data-theme="dark"] .theme-toggle-knob { transform: translateX(26px); }
-
-  .theme-toggle-knob svg {
-    width: 10px; height: 10px;
-    fill: none;
-    stroke: white;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  [data-theme="light"] .theme-toggle-knob svg { stroke: #fafafa; }
-
-  .toggle-sun, .toggle-moon { transition: opacity 0.3s; }
-  [data-theme="light"] .toggle-moon { display: none; }
-  [data-theme="dark"] .toggle-sun { display: none; }
-
-  /* === HERO === */
-  .hero {
-    min-height: 100vh;
-    padding: 10rem 3rem 6rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeSlideUp 1s 0.8s ease forwards;
-  }
-
-  .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(3rem, 8vw, 7.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    max-width: 900px;
-    opacity: 0;
-    animation: fadeSlideUp 1.2s 1s ease forwards;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--accent);
-  }
-
-  .hero-sub {
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--text-muted);
-    max-width: 500px;
-    margin-top: 2.5rem;
-    line-height: 1.8;
-    opacity: 0;
-    animation: fadeSlideUp 1s 1.3s ease forwards;
-  }
-
-  .hero-rule {
-    width: 60px; height: 2px;
-    background: var(--accent);
-    margin-top: 3rem;
-    opacity: 0;
-    animation: fadeSlideUp 1s 1.5s ease forwards;
-    border-radius: 1px;
-  }
-
-  .scroll-hint {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-top: 3rem;
-    opacity: 0;
-    animation: fadeIn 1s 2s ease forwards;
-  }
-
-  .scroll-line {
-    width: 40px; height: 1px;
-    background: var(--text-dim);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .scroll-line::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: var(--accent);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes scrollPulse {
-    0% { left: -100%; }
-    50% { left: 0%; }
-    100% { left: 100%; }
-  }
-
-  /* === SECTION COMMON === */
-  section { position: relative; z-index: 1; padding: 8rem 3rem; }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300;
-    color: var(--text);
-    margin-bottom: 4rem;
-    line-height: 1.15;
-  }
-
-  .section-title em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  /* === REVEAL ANIMATIONS === */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* === PROJECTS === */
-  .projects-wrap {
-    max-width: 1100px;
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
-  }
-
-  [data-animate] { opacity: 0; transform: translateY(24px); }
-
-  [data-animate].visible {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  /* -- shared -- */
-  .project-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    font-family: var(--mono);
-    font-size: 0.62rem;
     font-weight: 400;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-  }
-
-  .status-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #16a34a;
-    flex-shrink: 0;
-  }
-
-  [data-theme="dark"] .status-dot { background: #4ade80; }
-  .status-dot.building { background: var(--accent); }
-
-  .project-desc {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.75;
-  }
-
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-
-  .tag {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.7rem;
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    border-radius: 3px;
-    white-space: nowrap;
-  }
-
-  .project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  .project-link svg { width: 15px; height: 15px; stroke: currentColor; transition: transform 0.3s; }
-  .project-link:hover svg { transform: translateX(4px); }
-
-  /* -- featured -- */
-  .project-featured {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .project-featured.no-visual { grid-template-columns: 1fr; max-width: 720px; }
-  .project-featured.no-visual .project-visual { display: none; }
-
-  .featured-body h3 {
-    font-family: var(--serif);
-    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    margin: 1rem 0 0.9rem;
-  }
-
-  .project-lede {
-    font-size: 1.02rem;
-    font-weight: 300;
-    color: var(--text);
-    line-height: 1.7;
-    margin-bottom: 1rem;
-  }
-
-  .project-facts {
-    display: flex;
-    gap: 2.25rem;
-    list-style: none;
-    margin: 1.75rem 0;
-    padding: 1.25rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .fact-num {
-    font-family: var(--serif);
-    font-size: 1.6rem;
-    font-weight: 300;
-    color: var(--text);
+    font-size: clamp(3.25rem, 11vw, 10rem);
     line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-left: -0.02em;
   }
 
-  .fact-label {
-    font-family: var(--mono);
-    font-size: 0.57rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-top: 0.5rem;
-  }
-
-  .featured-foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
+  .hero p {
     margin-top: 1.75rem;
+    font-size: 1.125rem;
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 34ch;
   }
 
-  .project-visual {
-    position: relative;
-    aspect-ratio: 16 / 10;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    background: var(--bg-card);
-    box-shadow: var(--card-shadow);
-    transition: border-color 0.5s, box-shadow 0.5s;
-  }
+  /* ===================================================================
+     INDEX — five projects, one construction.
+     Number in column 1, copy in 2–6, evidence in 7–12. No exceptions.
+     =================================================================== */
+  /* Rules run edge to edge so the index reads as a table, not a stack of cards. */
+  .index { list-style: none; border-top: 1px solid var(--rule); }
+  .index > li { border-bottom: 1px solid var(--rule); }
 
-  .project-visual img {
-    display: block;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: top center;
-  }
-
-  /* -- secondary grid -- */
-  .projects-secondary {
+  .entry {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  .project-card {
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--gap);
+    align-items: start;
+    padding: clamp(2.5rem, 4vw, 3.5rem) var(--margin);
     color: inherit;
     text-decoration: none;
-    box-shadow: var(--card-shadow);
   }
 
-  .card-thumb {
-    display: block;
+  .entry .no { grid-column: 1 / 2; padding-top: 0.85rem; color: var(--ink); }
+  .entry-body { grid-column: 2 / 7; }
+  .entry-figure { grid-column: 7 / 13; }
+
+  .entry h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 3.1vw, 2.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.14em;
+    transition: text-decoration-color 0.25s ease;
+  }
+
+  a.entry:hover h2 { text-decoration: underline; text-decoration-color: var(--accent); }
+  a.entry:hover .no { color: var(--accent); }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.4;
+    font-variant-numeric: tabular-nums lining-nums;
+    color: var(--ink);
+  }
+
+  .say { margin-top: 1.1rem; font-size: 1.0625rem; line-height: 1.6; color: var(--ink-body); max-width: 54ch; }
+
+  /* Status and stack on two fixed columns, so they line up down the page. */
+  .meta { display: flex; flex-wrap: wrap; gap: 0.35rem 1.5rem; margin-top: 1.75rem; color: var(--ink-mid); }
+  .meta .live::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    margin-right: 0.6rem;
+    vertical-align: 0.1em;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .meta .wip::before { background: none; box-shadow: inset 0 0 0 1px currentColor; }
+
+  .shot { overflow: hidden; box-shadow: inset 0 0 0 1px var(--rule); }
+
+  .shot img {
     width: 100%;
     height: auto;
-    /* Flex items default to min-height:auto, which would pin this to the
-       image's intrinsic 800px height. Let it shrink to the card width. */
-    min-height: 0;
-    flex-shrink: 0;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
-    object-position: top center;
-    border-bottom: 1px solid var(--border);
-    transition: border-color 0.5s;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  .card-body {
+  a.entry:hover .shot img { transform: scale(1.02); }
+
+  /* The device sits on the page's own ground, so it follows the theme
+     instead of burning a cream rectangle into the dark palette. */
+  .shot.device { background: var(--paper); }
+  .shot.device img { object-fit: contain; padding-block: 1.25rem; }
+
+  [data-theme="dark"] .shot img { filter: brightness(0.9); }
+
+
+  /* -- 05's evidence is a drawing, not a screenshot -------------------- */
+  .funnel { list-style: none; border-top: 1px solid var(--rule); }
+
+  .funnel li {
     display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 1.75rem 2rem 2rem;
-  }
-
-  /* Stand-in for projects with no public build to screenshot. */
-  .card-thumb-none {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    flex-shrink: 0;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg-card-hover);
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    transition: background 0.5s, border-color 0.5s, color 0.5s;
-  }
-
-  a.project-card {
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, box-shadow 0.35s, background 0.5s;
-  }
-
-  a.project-card:hover {
-    transform: translateY(-3px);
-    background: var(--bg-card-hover);
-    border-color: var(--border-hover);
-    box-shadow: var(--card-shadow-hover);
-  }
-
-  .card-head {
-    display: flex;
-    align-items: flex-start;
+    align-items: baseline;
     justify-content: space-between;
-    gap: 1rem;
-    margin: 0.9rem 0 0.75rem;
+    gap: 2rem;
+    min-height: 3.5rem;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
   }
 
-  .project-card h3 {
-    font-family: var(--serif);
-    font-size: 1.4rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
+  .funnel .count {
+    font-size: 1.125rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums lining-nums;
+    color: var(--ink);
   }
 
-  .card-arrow {
-    flex-shrink: 0;
-    width: 16px; height: 16px;
-    stroke: var(--text-dim);
-    fill: none;
-    stroke-width: 1.5;
-    margin-top: 0.4rem;
-    transition: stroke 0.3s, transform 0.3s;
-  }
+  .funnel li:last-child { color: var(--accent); }
+  .funnel li:last-child .count { color: var(--accent); }
 
-  a.project-card:hover .card-arrow {
-    stroke: var(--accent);
-    transform: translate(3px, -3px);
-  }
+  /* ===================================================================
+     FOOTER
+     =================================================================== */
+  footer { padding-top: clamp(4rem, 7vw, 6rem); padding-bottom: 3rem; }
 
-  .card-body .project-tags { margin-top: 1.5rem; }
-  .project-card .project-desc { flex: 1; }
-
-  /* === PHILOSOPHY === */
-  .philosophy {
-    max-width: 700px;
-    padding: 10rem 3rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .philosophy blockquote {
-    font-family: var(--serif);
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.5;
-    color: var(--text);
-    position: relative;
-    padding-left: 2rem;
-    border-left: 2px solid transparent;
-    border-left-color: var(--accent);
-  }
-
-  .philosophy .attribution {
-    font-family: var(--sans);
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    margin-top: 1.5rem;
-    padding-left: 2rem;
-    letter-spacing: 0.05em;
-  }
-
-  /* === WRITING === */
-  .writing {
-    max-width: 700px;
-    padding: 8rem 3rem;
-    border-top: 1px solid var(--border);
-    transition: border-color 0.5s;
-  }
-
-  .writing-desc {
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 2.5rem;
-    transition: color 0.5s;
-  }
-
-  .substack-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    padding: 0.9rem 2rem;
-    border: 1px solid var(--accent);
-    border-radius: 100px;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .substack-link::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--accent);
-    opacity: 0;
-    transition: opacity 0.4s;
-    border-radius: inherit;
-  }
-
-  .substack-link:hover { color: var(--bg); border-color: transparent; }
-  .substack-link:hover::before { opacity: 1; }
-
-  .substack-link span, .substack-link svg { position: relative; z-index: 1; }
-
-  .substack-link svg {
-    width: 16px; height: 16px;
-    stroke: currentColor;
-    transition: transform 0.3s;
-  }
-
-  .substack-link:hover svg { transform: translateX(4px); }
-
-  /* === ABOUT STRIP === */
-  .about-strip {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .about-cell {
-    padding: 3rem;
-    border-right: 1px solid var(--border);
-    transition: background 0.4s;
-  }
-
-  .about-cell:last-child { border-right: none; }
-  .about-cell:hover { background: var(--bg-card); }
-
-  .about-cell .stat {
-    font-family: var(--serif);
-    font-size: 2.5rem;
-    font-weight: 300;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-  }
-
-  .about-cell .stat-label {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 0.75rem;
-  }
-
-  .about-cell .stat-desc {
-    font-size: 0.8rem;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  /* === FOOTER === */
-  footer {
-    padding: 4rem 3rem;
+  .footer-top {
     display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
     justify-content: space-between;
-    align-items: end;
-    position: relative;
-    z-index: 1;
+    gap: 1.5rem 3rem;
   }
 
-  .footer-left .footer-name {
+  .footer-top a.mail {
     font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin-bottom: 0.5rem;
-  }
-
-  .footer-left .footer-desc { font-size: 0.8rem; color: var(--text-dim); font-weight: 300; }
-  .footer-right { text-align: right; }
-  .footer-links { display: flex; gap: 2rem; margin-bottom: 0.75rem; }
-
-  .footer-links a {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-dim);
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--ink);
     text-decoration: none;
-    transition: color 0.3s;
-    position: relative;
   }
 
-  .footer-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px; left: 0;
-    width: 0; height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
+  .footer-top a.mail:hover { color: var(--accent); }
+
+  .footer-top nav { display: flex; flex-wrap: wrap; gap: 1.75rem; color: var(--ink-mid); }
+  .footer-top nav a { text-decoration: none; text-underline-offset: 0.45em; text-decoration-thickness: 1px; }
+  .footer-top nav a:hover { color: var(--ink); text-decoration: underline; }
+
+  .footer-top nav .where { color: var(--ink-mid); }
+
+  /* ===================================================================
+     RESPONSIVE
+     =================================================================== */
+  @media (max-width: 1080px) {
+    :root { --margin: 2.5rem; }
+    .entry-body { grid-column: 2 / 13; }
+    .entry-figure { grid-column: 2 / 13; margin-top: 2rem; }
   }
 
-  .footer-links a:hover { color: var(--accent); }
-  .footer-links a:hover::after { width: 100%; }
-  .footer-copy { font-size: 0.7rem; color: var(--text-dim); opacity: 0.5; }
-
-  /* === ANIMATIONS === */
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
+  @media (max-width: 640px) {
+    :root { --margin: 1.25rem; --gap: 0.75rem; }
+    header { padding-block: 1rem; }
+    .header-end { gap: 1.1rem; }
+    .hero h1 { font-size: 3.5rem; }
+    .hero p { margin-top: 1.75rem; font-size: 1.0625rem; }
+    .entry { padding-block: 3rem; }
+    .entry .no { grid-column: 1 / 13; grid-row: 1; padding-top: 0; margin-bottom: 0.75rem; }
+    .entry-body { grid-column: 1 / 13; grid-row: 2; }
+    .entry-figure { grid-column: 1 / 13; grid-row: 3; margin-top: 1.75rem; }
+    .stats { gap: 0.25rem 1.25rem; }
+    .meta { grid-template-columns: 1fr; gap: 0.25rem; }
+    .footer-top { flex-direction: column; align-items: flex-start; }
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  /* === RESPONSIVE === */
-  @media (max-width: 940px) {
-    .project-featured { grid-template-columns: 1fr; gap: 2.5rem; }
-    .project-featured .project-visual { order: -1; }
-    .projects-secondary { grid-template-columns: 1fr; }
-    .projects-wrap { gap: 3.5rem; }
-  }
-
-  @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    .menu-toggle { display: flex; }
-    .mobile-menu { display: flex; }
-    .hero { padding: 0 1.5rem; min-height: 100svh; }
-    section { padding: 5rem 1.5rem; }
-    .card-body { padding: 1.5rem 1.75rem 1.75rem; }
-    .project-facts { gap: 1.5rem; }
-    .featured-foot { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
-    .about-strip { grid-template-columns: 1fr; }
-    .about-cell { border-right: none; border-bottom: 1px solid var(--border); }
-    .about-cell:last-child { border-bottom: none; }
-    footer { flex-direction: column; gap: 2rem; }
-    .footer-right { text-align: left; }
-    .philosophy { padding: 6rem 1.5rem; }
-    .writing { padding: 5rem 1.5rem; }
-    .scroll-hint { display: none; }
-    .cursor-glow { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
   }
 </style>
 </head>
 <body>
 
-<!-- SCROLL PROGRESS -->
-<div class="scroll-progress" id="scrollProgress"></div>
-
-<!-- NAV -->
-<nav id="mainNav">
-  <div class="nav-left">
-    <a href="#" class="nav-logo">A<span>.</span>C</a>
+<header>
+  <a class="wordmark label" href="./">Anindya Chakraborty</a>
+  <div class="header-end">
+    <a class="label" href="#work" aria-current="page">Work</a>
+    <a class="label" href="https://anindyachakraborty.substack.com/" target="_blank" rel="noopener">Essays</a>
+    <a class="label" href="about.html">About</a>
+    <button class="theme-btn" type="button" onclick="toggleTheme()" aria-label="Switch colour theme"></button>
   </div>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#writing">Writings</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme" tabindex="0">
-      <div class="theme-toggle-knob">
-        <svg class="toggle-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg class="toggle-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </div>
-    </div>
-    <div class="menu-toggle" id="menuToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</nav>
+</header>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#projects" onclick="closeMenu()">Projects</a>
-  <a href="#writing" onclick="closeMenu()">Writings</a>
-  <a href="about.html">About</a>
-  <a href="#contact" onclick="closeMenu()">Contact</a>
-</div>
+<main>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-eyebrow">Independent Work</div>
-  <h1 class="hero-title">Things I build, <em>end to end</em></h1>
-  <p class="hero-sub">
-    Open-data dashboards for a city and a state, a global cost-of-living tracker, an equity screening pipeline, and an Android medication reminder. Data pipeline, front end and deployment — all of it mine.
-  </p>
-  <div class="hero-rule"></div>
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    Scroll to explore
-  </div>
-</section>
+  <section class="hero shell">
+    <h1>Things I build,<br>end to end.</h1>
+    <p>Five projects, built solo. Data pipeline, front end and deployment — all of it mine.</p>
+  </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label reveal">Portfolio</div>
-  <h2 class="section-title reveal">Selected <em>works</em></h2>
+  <ol class="index" id="work">
 
-  <div class="projects-wrap">
-
-    <!-- FEATURED -->
-    <article class="project-featured" data-animate>
-      <div class="featured-body">
-        <div class="project-eyebrow"><span class="status-dot"></span>Live &nbsp;·&nbsp; Open data</div>
-        <h3>Kolkata City Dashboard</h3>
-        <p class="project-lede">
-          Nineteen domains of open data about one city — demographics, climate, air quality, transport, budget, crime, health — stitched into a single interactive portrait.
-        </p>
-        <p class="project-desc">
-          Thirty-plus primary sources arrive as APIs, CSVs and PDF-only government releases. A Python pipeline cleans and aggregates them into JSON committed to the repo; Next.js inlines that at build time, so every chart is pre-rendered with no runtime database. Every figure links back to its source, and the known limitations are published rather than hidden.
-        </p>
-        <ul class="project-facts">
-          <li>
-            <div class="fact-num">141</div>
-            <div class="fact-label">Wards mapped</div>
-          </li>
-          <li>
-            <div class="fact-num">30+</div>
-            <div class="fact-label">Primary sources</div>
-          </li>
-          <li>
-            <div class="fact-num">19</div>
-            <div class="fact-label">Domains</div>
-          </li>
-        </ul>
-        <div class="featured-foot">
-          <div class="project-tags">
-            <span class="tag">Next.js</span>
-            <span class="tag">Python</span>
-            <span class="tag">Leaflet</span>
-          </div>
-          <a href="https://kolkata.datacarta.in/" target="_blank" rel="noopener" class="project-link">
-            View project
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-      <figure class="project-visual">
-        <img src="assets/kolkata-dashboard.jpg" width="1280" height="800" alt="The Kolkata City Dashboard ward map: an interactive choropleth of all 141 municipal wards coloured by population, with summary tiles above it.">
-      </figure>
-    </article>
-
-    <!-- SECONDARY -->
-    <div class="projects-secondary">
-
-      <a class="project-card" data-animate href="https://westbengal.datacarta.in/" target="_blank" rel="noopener">
-        <img class="card-thumb" src="assets/westbengal-dashboard.jpg" width="1280" height="800" loading="lazy" alt="The West Bengal State Dashboard home page, showing a GSDP trend chart and state summary figures.">
-        <div class="card-body">
-          <div class="project-eyebrow"><span class="status-dot"></span>Live</div>
-          <div class="card-head">
-            <h3>West Bengal Through Data</h3>
-            <svg class="card-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
-          </div>
-          <p class="project-desc">
-            The same treatment applied to a whole state — 19 domains, 40+ open data sources and drill-downs for all 23 districts, covering demographics, economy, climate, health, education and infrastructure.
+    <li>
+      <a class="entry" href="https://kolkata.datacarta.in/" target="_blank" rel="noopener">
+        <div class="no label">01</div>
+        <div class="entry-body">
+          <h2>Kolkata City Dashboard</h2>
+          <p class="stats"><span>141 wards</span><span>19 domains</span><span>30+ sources</span></p>
+          <p class="say">
+            Sources arrive as APIs, CSVs and PDF-only government releases. A Python
+            pipeline cleans them into JSON committed to the repo, and Next.js inlines it
+            at build time — every chart pre-rendered, no runtime database. Every figure
+            links back to where it came from.
           </p>
-          <div class="project-tags">
-            <span class="tag">Next.js</span>
-            <span class="tag">Python</span>
-            <span class="tag">Open Data</span>
+          <div class="meta label">
+            <span class="live">Live</span><span>Next.js, Python, Leaflet</span>
           </div>
         </div>
+        <figure class="entry-figure shot">
+          <img src="assets/kolkata-map.jpg" width="835" height="522" alt="The dashboard's ward map: a choropleth of Kolkata's 141 municipal wards shaded by population.">
+        </figure>
       </a>
+    </li>
 
-      <a class="project-card" data-animate href="https://canindya.github.io/price-rise/" target="_blank" rel="noopener">
-        <img class="card-thumb" src="assets/cost-of-living.jpg" width="1280" height="800" loading="lazy" alt="The Cost of Living Tracker explore view: a world choropleth of price changes beside a multi-category price trend chart.">
-        <div class="card-body">
-          <div class="project-eyebrow"><span class="status-dot"></span>Live</div>
-          <div class="card-head">
-            <h3>Cost of Living Tracker</h3>
-            <svg class="card-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
-          </div>
-          <p class="project-desc">
-            How consumer prices moved across 180+ countries over 25 years, on a world choropleth with 1, 5 and 10-year windows. Five spending categories, plus local-currency and PPP-adjusted views.
+    <li>
+      <a class="entry" href="https://westbengal.datacarta.in/" target="_blank" rel="noopener">
+        <div class="no label">02</div>
+        <div class="entry-body">
+          <h2>West Bengal Through Data</h2>
+          <p class="stats"><span>23 districts</span><span>19 domains</span><span>40+ sources</span></p>
+          <p class="say">
+            The same method applied to a whole state, with drill-downs to district level
+            across demographics, economy, climate, health, education and infrastructure.
           </p>
-          <div class="project-tags">
-            <span class="tag">React</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">Leaflet</span>
+          <div class="meta label">
+            <span class="live">Live</span><span>Next.js, Python, open data</span>
           </div>
         </div>
+        <figure class="entry-figure shot">
+          <img src="assets/westbengal-gsdp.jpg" width="601" height="376" loading="lazy" alt="A chart from the West Bengal dashboard showing gross state domestic product doubling between 2015-16 and 2024-25.">
+        </figure>
       </a>
+    </li>
 
-      <a class="project-card" data-animate href="https://remindme-ad455.web.app" target="_blank" rel="noopener">
-        <img class="card-thumb" src="assets/remindme.jpg" width="1280" height="800" loading="lazy" alt="The RemindMe landing page, showing the Android app's home screen with quick actions for members, caregivers, doctor visits and medical tests.">
-        <div class="card-body">
-          <div class="project-eyebrow"><span class="status-dot"></span>Live on Google Play</div>
-          <div class="card-head">
-            <h3>RemindMe</h3>
-            <svg class="card-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
-          </div>
-          <p class="project-desc">
-            An Android medication reminder built around the moments that break adherence — entering the prescription and remembering the dose. Extends to doctor visits, medical tests, refill tracking and caregiver alerts. Nine languages, no ads, no paywall.
+    <li>
+      <a class="entry" href="https://canindya.github.io/price-rise/" target="_blank" rel="noopener">
+        <div class="no label">03</div>
+        <div class="entry-body">
+          <h2>Cost of Living Tracker</h2>
+          <p class="stats"><span>180 countries</span><span>25 years</span><span>5 categories</span></p>
+          <p class="say">
+            One, five and ten-year windows on consumer prices, with local-currency and
+            PPP-adjusted views side by side, so the currency effect is visible rather
+            than assumed.
           </p>
-          <div class="project-tags">
-            <span class="tag">Android</span>
-            <span class="tag">Kotlin</span>
-            <span class="tag">ML Kit OCR</span>
+          <div class="meta label">
+            <span class="live">Live</span><span>React, TypeScript, Leaflet</span>
           </div>
         </div>
+        <figure class="entry-figure shot">
+          <img src="assets/cost-of-living-map.jpg" width="585" height="366" loading="lazy" alt="A world choropleth from the Cost of Living Tracker, shading every country by its ten-year price change.">
+        </figure>
       </a>
+    </li>
 
-      <div class="project-card" data-animate>
-        <div class="card-thumb-none">No public build yet</div>
-        <div class="card-body">
-          <div class="project-eyebrow"><span class="status-dot building"></span>In development</div>
-          <div class="card-head">
-            <h3>StockPicker</h3>
-          </div>
-          <p class="project-desc">
-            A six-stage pipeline that scans all ~1,800 NSE-listed stocks and ranks the top 50 — fundamental filters, nine technical and seven momentum signals, then a random forest / XGBoost / logistic regression ensemble. Every pick ships with the score breakdown behind it.
+    <li>
+      <a class="entry" href="https://remindme-ad455.web.app" target="_blank" rel="noopener">
+        <div class="no label">04</div>
+        <div class="entry-body">
+          <h2>RemindMe</h2>
+          <p class="stats"><span>9 languages</span><span>0 ads</span><span>on-device OCR</span></p>
+          <p class="say">
+            An Android medication reminder that starts with a photograph of the
+            prescription rather than a form. Extends to doctor visits, tests, refills
+            and caregiver alerts.
           </p>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Quant</span>
+          <div class="meta label">
+            <span class="live">Google Play</span><span>Android, Kotlin, ML Kit OCR</span>
           </div>
         </div>
+        <figure class="entry-figure shot device">
+          <img src="assets/remindme-device.png" width="238" height="482" loading="lazy" alt="The RemindMe home screen on an Android phone, with quick actions for members, caregivers, doctor visits and medical tests.">
+        </figure>
+      </a>
+    </li>
+
+    <li>
+      <div class="entry">
+        <div class="no label">05</div>
+        <div class="entry-body">
+          <h2>StockPicker</h2>
+          <p class="stats"><span>~1,800 listings</span><span>16 signals</span><span>50 ranked</span></p>
+          <p class="say">
+            A six-stage screening pipeline for NSE equities. Every pick ships with the
+            score breakdown behind it, so the ranking can be argued with rather than
+            trusted.
+          </p>
+          <div class="meta label">
+            <span class="live wip">In development</span><span>Python, machine learning</span>
+          </div>
+        </div>
+        <!-- No public build to screenshot, so the pipeline is drawn instead. -->
+        <ol class="entry-figure funnel" aria-label="Screening pipeline, stage by stage">
+          <li><span>Universe of NSE equities</span><span class="count">1,800</span></li>
+          <li><span>Fundamental filters</span><span class="count">6</span></li>
+          <li><span>Technical signals</span><span class="count">9</span></li>
+          <li><span>Momentum signals</span><span class="count">7</span></li>
+          <li><span>Models in the ensemble</span><span class="count">3</span></li>
+          <li><span>Ranked output</span><span class="count">50</span></li>
+        </ol>
       </div>
+    </li>
 
-    </div>
+  </ol>
 
-  </div>
-</section>
+</main>
 
-<!-- PHILOSOPHY -->
-<section class="philosophy reveal">
-  <blockquote>
-    The best way to complain is to build it.
-  </blockquote>
-</section>
-
-<!-- WRITING -->
-<section class="writing reveal" id="writing">
-  <div class="section-label">Writing</div>
-  <h2 class="section-title">Finance, Function, <em>Fiction</em></h2>
-  <p class="writing-desc">Occasional essays on banking, product development, and books.</p>
-  <a href="https://anindyachakraborty.substack.com/" target="_blank" class="substack-link">
-    <span>Read on Substack</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-  </a>
-</section>
-
-<!-- ABOUT STRIP -->
-<div class="about-strip" id="about">
-  <div class="about-cell">
-    <div class="stat">4</div>
-    <div class="stat-label">Live in production</div>
-    <div class="stat-desc">Two open-data dashboards, a cost-of-living tracker, and an Android app — all publicly accessible, with a fifth in development.</div>
-  </div>
-  <div class="about-cell">
-    <div class="stat">15+</div>
-    <div class="stat-label">Years in product</div>
-    <div class="stat-desc">Product roles across Amazon, Citi, Bandhan Bank and PwC, spanning ecommerce, banking and fintech. MBA, IIM Calcutta.</div>
-  </div>
-  <div class="about-cell">
-    <div class="stat">Solo</div>
-    <div class="stat-label">How these get built</div>
-    <div class="stat-desc">Every project here is mine end to end — sourcing the data, writing the pipeline, building the interface, and shipping it.</div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer id="contact">
-  <div class="footer-left">
-    <div class="footer-name">Anindya Chakraborty</div>
-    <div class="footer-desc">Product leader. Builder.</div>
-  </div>
-  <div class="footer-right">
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/anindya-chakraborty/" target="_blank">LinkedIn</a>
-      <a href="https://github.com/canindya" target="_blank">GitHub</a>
-      <a href="https://x.com/NtellShow" target="_blank">X</a>
-      <a href="https://anindyachakraborty.substack.com/" target="_blank">Substack</a>
-      <a href="mailto:anindya.chakraborty@gmail.com">Email</a>
-    </div>
-    <div class="footer-copy">&copy; 2026 Anindya Chakraborty</div>
+<footer class="shell" id="contact">
+  <div class="footer-top">
+    <a class="mail" href="mailto:anindya.chakraborty@gmail.com">anindya.chakraborty@gmail.com</a>
+    <nav class="label">
+      <a href="https://anindyachakraborty.substack.com/" target="_blank" rel="noopener">Substack</a>
+      <a href="https://www.linkedin.com/in/anindya-chakraborty/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/canindya" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://x.com/NtellShow" target="_blank" rel="noopener">X</a>
+      <span class="where">Kolkata, India</span>
+    </nav>
   </div>
 </footer>
 
 <script>
   // Theme toggle. The initial theme is set by the blocking script in <head>.
   function toggleTheme() {
-    const html = document.documentElement;
-    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    var html = document.documentElement;
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch(e) {}
+    try { localStorage.setItem('theme', next); } catch (e) {}
   }
 
-  // Keyboard support for toggle
-  document.querySelector('.theme-toggle').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); }
-  });
-
-  // === SCROLL PROGRESS BAR ===
-  window.addEventListener('scroll', () => {
-    const scrollTop = document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const progress = (scrollTop / scrollHeight) * 100;
-    document.getElementById('scrollProgress').style.width = progress + '%';
-  }, { passive: true });
-
-  // === SMART NAV (hide on scroll down, show on scroll up) ===
-  let lastScroll = 0;
-  const nav = document.getElementById('mainNav');
-
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-    if (currentScroll > lastScroll && currentScroll > 100) {
-      nav.classList.add('nav-hidden');
-    } else {
-      nav.classList.remove('nav-hidden');
-    }
-    lastScroll = currentScroll;
-  }, { passive: true });
-
-  // === FEATURED VISUAL ===
-  // Collapse the featured project to a single column if its screenshot is missing,
-  // so an absent asset never renders as a broken image.
-  document.querySelectorAll('.project-visual img').forEach(img => {
-    const drop = () => img.closest('.project-featured').classList.add('no-visual');
+  // A missing screenshot should drop its frame, never render broken.
+  document.querySelectorAll('.shot img').forEach(function (img) {
+    var drop = function () { img.closest('figure').remove(); };
     if (img.complete && img.naturalWidth === 0) drop();
     img.addEventListener('error', drop);
   });
-
-  // === MOBILE MENU ===
-  const menuToggle = document.getElementById('menuToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  function closeMenu() {
-    menuToggle.classList.remove('active');
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  menuToggle.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.contains('open');
-    if (isOpen) {
-      closeMenu();
-    } else {
-      menuToggle.classList.add('active');
-      mobileMenu.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-  });
-
-  // === INTERSECTION OBSERVER FOR ALL REVEALS ===
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  // === INTERSECTION OBSERVER FOR CARDS ===
-  const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => { entry.target.classList.add('visible'); }, i * 150);
-        cardObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('[data-animate]').forEach(el => cardObserver.observe(el));
-
-  // Fallback: if cards are still hidden after 2s, force them visible
-  setTimeout(() => {
-    document.querySelectorAll('[data-animate]:not(.visible)').forEach(el => el.classList.add('visible'));
-  }, 2000);
-
 </script>
 
 </body>
