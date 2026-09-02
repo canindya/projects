@@ -9,6 +9,7 @@
 - **Screenshots art-directed**: Each source screenshot cropped to one meaningful region (`kolkata-map`, `westbengal-gsdp`, `cost-of-living-map`) and the RemindMe device cut out of its marketing page onto a theme-aware ground
 - **StockPicker**: The "no public build yet" placeholder replaced with a typographic table of the six pipeline stages and their figures
 - **About page**: Rebuilt on the same system — a hairline record of roles with years, titles and outcomes in three columns
+- **West Bengal artefact**: The GSDP-chart-only crop was ~60% empty navy. Replaced with the state overview — headline findings, the trend chart and the summary figure row; `westbengal-gsdp.jpg` renamed to `westbengal-overview.jpg`
 
 ### Removed
 - **Decorative furniture**: Scroll-progress bar, hide-on-scroll nav, all entrance/reveal animations, the philosophical pull-quote section, the three-up stat strip, the "scroll to explore" affordance, the pill button, and the bordered project cards
@@ -18,6 +19,7 @@
 ### Fixed
 - **Image aspect ratios**: Intrinsic `height` attributes were overriding `aspect-ratio`, so every project frame rendered at its source height instead of one shared 3:2 ratio
 - **Copy**: "Tobaco" and "one of top 10 banks" in the TCS entry
+- **Off-ratio project crops**: The Cost of Living and West Bengal crops were 1.60 against a 3:2 frame, so `object-fit: cover` trimmed them a second time and cut the cost-of-living colour legend. Both recropped to exactly 3:2, so nothing is cropped in the browser
 
 ## [2026-08-07]
 
