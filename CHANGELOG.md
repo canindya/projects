@@ -2,6 +2,9 @@
 
 ## [2026-09-06]
 
+### Added
+- **`styles.css`**: The design system — palette, base, grid, both type registers, header, hero, band, footer and the shared responsive rules — extracted into one stylesheet linked by every page. Page files now carry only their own components (39 rules on the index, 16 on the record), and no selector is defined in both
+
 ### Changed
 - **Rebuilt both pages as a catalogue**: One typeface (Archivo variable) in two registers — expanded capitals for everything monumental, normal-width lowercase for everything read. Twelve columns, an 8px baseline and a 72px section rhythm throughout
 - **Palette**: Basalt `#14171a` / limestone `#e9e7df` with a single verdigris accent `#6fb69c`, used only for status, hover and the surname. Dark is now the default ground, and the three dark product screenshots sit on it naturally instead of reading as bricks on cream
@@ -14,6 +17,7 @@
 
 ### Fixed
 - **Footer email**: Was set at 30px in expanded uppercase, which both shouted and misrepresented the address. Now 20px, lowercase, at normal width
+- **About page hero was double the index's**: 112px against 56px at a 1440 window, with 57.6px of hero padding against 40px. Three rounds of hero-size reduction had all been applied to `index.html` only; `about.html` still carried the original draft value. Both now share one rule in `styles.css`, so the two cannot drift again
 
 ## [2026-09-02]
 
