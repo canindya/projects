@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-09-06]
+
+### Changed
+- **Rebuilt both pages as a catalogue**: One typeface (Archivo variable) in two registers — expanded capitals for everything monumental, normal-width lowercase for everything read. Twelve columns, an 8px baseline and a 72px section rhythm throughout
+- **Palette**: Basalt `#14171a` / limestone `#e9e7df` with a single verdigris accent `#6fb69c`, used only for status, hover and the surname. Dark is now the default ground, and the three dark product screenshots sit on it naturally instead of reading as bricks on cream
+- **Works are catalogue entries**: Numbered I–V with the numeral hanging in the left margin, the screenshot as a plate with a caption beneath it, and a label column carrying a tabular figures list, the description, the stack and the link
+- **StockPicker**: The six-stage specification table now reads as the catalogue's "dimensions" block rather than a workaround for a missing screenshot
+- **Hero scale**: The name renders at 56px on a 1366 window (was 136px at first draft), so the works band and the first entry sit above the fold; work titles came down to 32px to hold the hierarchy
+- **Plates reduced to four columns** (from six) so a weak screenshot reads as a supporting thumbnail rather than the main event
+- **Statement and footer rebuilt from the page's own devices**: a figures list beside the prose, a `CONTACT` band dividing the two sections, and the elsewhere links as hairline rows with an arrow — replacing a stacked word list, a vague "ALSO" label and the only inline underlined links on the site
+- **About page** rebuilt on the same system as "The Record", with the career as hairline rows of years / org / outcome
+
+### Fixed
+- **Footer email**: Was set at 30px in expanded uppercase, which both shouted and misrepresented the address. Now 20px, lowercase, at normal width
+
 ## [2026-09-02]
 
 ### Changed

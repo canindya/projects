@@ -3,59 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Anindya Chakraborty</title>
+<title>The Record — Anindya Chakraborty</title>
 <meta name="description" content="Anindya Chakraborty: product leader with 15+ years across banking, fintech and technology — PwC, Amazon, Citi, Bandhan Bank, TCS. MBA, IIM Calcutta.">
 
 <meta property="og:type" content="profile">
-<meta property="og:title" content="About — Anindya Chakraborty">
-<meta property="og:description" content="Product leader with 15+ years across banking, fintech and technology. Now building independently.">
+<meta property="og:title" content="The Record — Anindya Chakraborty">
+<meta property="og:description" content="Fifteen years of product work across banking, fintech and technology. Now building independently.">
 <meta property="og:url" content="https://canindya.github.io/projects/about.html">
+<meta property="og:image" content="https://canindya.github.io/projects/assets/kolkata-map.jpg">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1917'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23e8e4db' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
-<meta name="theme-color" content="#f3f0e9" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#1b1917" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314171a'/%3E%3Crect x='6' y='14' width='20' height='2' fill='%236fb69c'/%3E%3Crect x='6' y='20' width='13' height='2' fill='%23e9e7df'/%3E%3Crect x='6' y='8' width='13' height='2' fill='%23e9e7df'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#14171a" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#e9e7df" media="(prefers-color-scheme: light)">
 
 <script>
-  // Set the theme before first paint: saved choice wins, otherwise follow the OS.
-  // Inline and blocking on purpose — deferring this causes a flash of the wrong theme.
   (function () {
     var saved = null;
     try { saved = localStorage.getItem('theme'); } catch (e) {}
-    var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
 <style>
-  /* Same tokens and same rules as the index — one system across two pages. */
-  :root, [data-theme="light"] {
-    color-scheme: light;
-    --paper: #f3f0e9;
-    --ink: #131211;
-    --ink-mid: #6b675e;
-    --ink-body: #3a3833;
-    --rule: rgba(19, 18, 17, 0.08);
-    --accent: #8c2f24;
+  /* Same system as the index: one typeface, two registers, twelve columns,
+     an eight-pixel baseline and a seventy-two-pixel rhythm. */
+
+  :root, [data-theme="dark"] {
+    color-scheme: dark;
+    --ground:  #14171a;
+    --panel:   #1b1f22;
+    --stone:   #e9e7df;
+    --muted:   #8f9793;
+    --rule:    rgba(233, 231, 223, 0.15);
+    --rule-2:  rgba(233, 231, 223, 0.28);
+    --accent:  #6fb69c;
   }
 
-  [data-theme="dark"] {
-    color-scheme: dark;
-    --paper: #1b1917;
-    --ink: #e8e4db;
-    --ink-mid: #8f8a80;
-    --ink-body: #c6c1b6;
-    --rule: rgba(232, 228, 219, 0.12);
-    --accent: #e0876a;
+  [data-theme="light"] {
+    color-scheme: light;
+    --ground:  #e9e7df;
+    --panel:   #dfdcd2;
+    --stone:   #14171a;
+    --muted:   #5d6461;
+    --rule:    rgba(20, 23, 26, 0.16);
+    --rule-2:  rgba(20, 23, 26, 0.3);
+    --accent:  #2c6a56;
   }
 
   :root {
-    --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
-    --sans: 'Instrument Sans', system-ui, -apple-system, sans-serif;
-    --margin: 6rem;
-    --gap: 1.5rem;
+    --sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+    --u: 8px;
+    --rhythm: 72px;
+    --margin: clamp(1.25rem, 5vw, 4.5rem);
+    --gutter: 24px;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -63,202 +67,235 @@
 
   body {
     font-family: var(--sans);
-    font-size: 0.9375rem;
-    line-height: 1.55;
-    background: var(--paper);
-    color: var(--ink-mid);
+    font-size: 1rem;
+    font-weight: 400;
+    font-stretch: 100%;
+    line-height: 1.6;
+    background: var(--ground);
+    color: var(--muted);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
 
-  ::selection { background: var(--ink); color: var(--paper); }
+  ::selection { background: var(--accent); color: var(--ground); }
   a { color: inherit; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
   .shell { padding-inline: var(--margin); }
 
-  .label { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); }
 
+  .mono-caps, .band-label, .years, .role, nav a, .wordmark, .note h3 {
+    font-stretch: 112%;
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .read { font-stretch: 100%; font-weight: 400; font-size: 1rem; line-height: 1.6; }
+
+  /* === HEADER === */
   header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    padding: 1.25rem var(--margin);
+    gap: var(--gutter);
+    padding: calc(var(--u) * 3) var(--margin);
+    border-bottom: 1px solid var(--rule);
   }
 
-  .wordmark { color: var(--ink); text-decoration: none; white-space: nowrap; }
+  .wordmark { color: var(--stone); text-decoration: none; white-space: nowrap; }
 
-  .header-end { display: flex; align-items: baseline; gap: 1.75rem; }
-  .header-end .theme-btn { margin-left: 1.5rem; }
-  .header-end a, .header-end button { color: var(--ink-mid); }
-  .header-end a { text-decoration: none; text-underline-offset: 0.45em; text-decoration-thickness: 1px; }
-  .header-end a:hover, .header-end button:hover { color: var(--ink); }
-  .header-end a[aria-current="page"] { color: var(--ink); text-decoration: underline; }
+  nav { display: flex; align-items: center; gap: calc(var(--u) * 4); }
+  nav a { text-decoration: none; color: var(--muted); }
+  nav a:hover, nav a[aria-current="page"] { color: var(--stone); }
 
-  .theme-btn {
-    font: inherit;
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    background: none; border: 0; padding: 0;
+  .swatch {
+    width: calc(var(--u) * 2);
+    height: calc(var(--u) * 2);
+    padding: 0;
+    border: 1px solid var(--rule-2);
+    background: var(--stone);
     cursor: pointer;
   }
 
-  [data-theme="light"] .theme-btn::after { content: 'Dark'; }
-  [data-theme="dark"] .theme-btn::after { content: 'Light'; }
+  .swatch:hover { background: var(--accent); border-color: var(--accent); }
 
-  /* === INTRO === */
-  .intro {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    column-gap: var(--gap);
-    align-items: start;
-    padding-block: clamp(2.5rem, 5vw, 4rem) clamp(4rem, 7vw, 6rem);
+  /* === HERO === */
+  .hero { padding-block: calc(var(--rhythm) * 0.8) var(--rhythm); align-items: end; }
+
+  .hero h1 {
+    grid-column: 1 / 8;
+    font-stretch: 125%;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 8vw, 7rem);
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    color: var(--stone);
   }
 
-  .intro h1 {
-    grid-column: 1 / 7;
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(3rem, 6.6vw, 6rem);
-    line-height: 1;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    margin-left: -0.02em;
+  .hero h1 span { display: block; }
+  .hero h1 span:last-child { color: var(--accent); }
+
+  .hero .bio { grid-column: 8 / 13; color: var(--muted); }
+  .hero .bio p { font-size: 1.0625rem; line-height: 1.6; }
+  .hero .bio p + p { margin-top: calc(var(--u) * 2); }
+  .hero .bio p:first-child { color: var(--stone); }
+
+  /* === BANDS === */
+  .band {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--gutter);
+    padding: calc(var(--u) * 2) var(--margin);
+    border-top: 1px solid var(--rule-2);
+    border-bottom: 1px solid var(--rule);
+    color: var(--muted);
   }
 
-  .intro .bio { grid-column: 7 / 13; font-size: 1.0625rem; line-height: 1.6; color: var(--ink-body); }
-  .intro .bio p + p { margin-top: 1rem; }
+  .band strong { font-weight: 500; color: var(--stone); }
 
-  /* === RECORD === */
-  .section { padding-top: clamp(3rem, 5vw, 4rem); }
-  .section > .label { color: var(--ink-mid); margin-bottom: 1.25rem; }
-
-  .rows { list-style: none; border-top: 1px solid var(--rule); }
+  /* === RECORD ROWS === */
+  .rows { list-style: none; }
+  .rows > li { border-bottom: 1px solid var(--rule); }
 
   .row {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    column-gap: var(--gap);
-    align-items: baseline;
-    padding-block: 1.75rem;
-    border-bottom: 1px solid var(--rule);
+    column-gap: var(--gutter);
+    row-gap: calc(var(--u) * 2);
+    align-items: start;
+    padding: calc(var(--u) * 5) var(--margin);
   }
 
-  .row .years { grid-column: 1 / 3; color: var(--ink-mid); font-variant-numeric: tabular-nums lining-nums; }
-  .row .who { grid-column: 3 / 7; }
-  .row .what { grid-column: 7 / 13; color: var(--ink-body); font-size: 1rem; line-height: 1.6; }
+  .years { grid-column: 1 / 3; color: var(--muted); font-variant-numeric: tabular-nums lining-nums; padding-top: calc(var(--u) * 0.75); }
+  .who { grid-column: 3 / 7; }
+  .what { grid-column: 7 / 13; color: var(--muted); }
 
-  .row h3 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 1.75rem;
+  .who h3 {
+    font-stretch: 125%;
+    font-weight: 600;
+    font-size: clamp(1.125rem, 2vw, 1.625rem);
     line-height: 1.1;
-    letter-spacing: -0.015em;
-    color: var(--ink);
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    color: var(--stone);
   }
 
-  .row .role { margin-top: 0.35rem; color: var(--ink-mid); }
+  .role { margin-top: calc(var(--u) * 1.5); color: var(--muted); }
 
   /* === NOTES === */
-  .notes {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    column-gap: var(--gap);
-    row-gap: 2.5rem;
-    padding-block: clamp(3rem, 5vw, 4rem);
-    border-top: 1px solid var(--rule);
-    margin-top: clamp(3rem, 5vw, 4rem);
-  }
-
+  .notes { padding-block: var(--rhythm); row-gap: calc(var(--u) * 5); }
   .note { grid-column: span 4; }
-  .note .label { color: var(--ink-mid); margin-bottom: 0.75rem; }
-  .note p { font-size: 1rem; line-height: 1.6; color: var(--ink-body); }
+  .note h3 { color: var(--muted); margin-bottom: calc(var(--u) * 1.5); }
+  .note p { color: var(--stone); }
 
   /* === FOOTER === */
-  footer { padding-top: clamp(4rem, 7vw, 6rem); padding-bottom: 2.5rem; }
+  footer { padding-block: calc(var(--u) * 7) calc(var(--u) * 5); }
 
-  .footer-top {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1.5rem 3rem;
+  .contact { grid-column: 3 / 8; }
+  .contact .key { color: var(--muted); }
+
+  .contact a.mail {
+    display: inline-block;
+    margin-top: calc(var(--u) * 1);
+    font-stretch: 105%;
+    font-weight: 500;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    letter-spacing: 0;
+    color: var(--stone);
+    text-decoration: none;
+    word-break: break-word;
   }
 
-  .footer-top a.mail {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(1.5rem, 2.8vw, 2rem);
-    letter-spacing: -0.02em;
-    color: var(--ink);
+  .contact a.mail:hover { color: var(--accent); }
+
+  /* The same hairline row used by the works index, so the links belong to
+     the page's grammar instead of forming a ragged stack of words. */
+  .elsewhere { grid-column: 9 / 13; list-style: none; border-top: 1px solid var(--rule); }
+  .elsewhere li { border-bottom: 1px solid var(--rule); }
+
+  .elsewhere a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--gutter);
+    padding-block: calc(var(--u) * 1.5);
+    font-stretch: 112%;
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
     text-decoration: none;
   }
 
-  .footer-top a.mail:hover { color: var(--accent); }
-  .footer-top nav { display: flex; flex-wrap: wrap; gap: 1.75rem; color: var(--ink-mid); }
-  .footer-top nav a { text-decoration: none; text-underline-offset: 0.45em; text-decoration-thickness: 1px; }
-  .footer-top nav a:hover { color: var(--ink); text-decoration: underline; }
+  .elsewhere a i { font-style: normal; color: var(--rule-2); transition: transform 0.25s ease, color 0.25s ease; }
+  .elsewhere a:hover { color: var(--stone); }
+  .elsewhere a:hover i { color: var(--accent); transform: translateX(4px); }
 
-  .footer-end {
+  .colophon {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 0.75rem 2rem;
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    padding-top: 1.25rem;
+    gap: calc(var(--u) * 1.5) var(--gutter);
+    margin-top: var(--rhythm);
+    padding-top: calc(var(--u) * 2);
     border-top: 1px solid var(--rule);
-    color: var(--ink-mid);
+    color: var(--muted);
   }
 
+  /* === RESPONSIVE === */
   @media (max-width: 1080px) {
-    :root { --margin: 2.5rem; }
-    .intro h1 { grid-column: 1 / 13; }
-    .intro .bio { grid-column: 1 / 10; margin-top: 2rem; }
-    .row .years { grid-column: 1 / 3; }
-    .row .who { grid-column: 3 / 13; }
-    .row .what { grid-column: 3 / 13; margin-top: 0.75rem; }
+    .hero h1 { grid-column: 1 / 13; }
+    .hero .bio { grid-column: 1 / 10; margin-top: calc(var(--u) * 5); }
+    .years { grid-column: 1 / 3; }
+    .who { grid-column: 3 / 13; }
+    .what { grid-column: 3 / 13; }
     .note { grid-column: span 6; }
+    .contact { grid-column: 1 / 10; }
+    .elsewhere { grid-column: 1 / 10; margin-top: calc(var(--u) * 5); }
   }
 
-  @media (max-width: 640px) {
-    :root { --margin: 1.25rem; --gap: 0.75rem; }
-    header { padding-block: 1rem; }
-    .header-end { gap: 1.1rem; }
-    .intro h1 { font-size: 2.75rem; }
-    .row .years, .row .who, .row .what { grid-column: 1 / 13; }
-    .row .who { margin-top: 0.5rem; }
-    .note { grid-column: 1 / 13; }
-    .footer-top { flex-direction: column; align-items: flex-start; }
+  @media (max-width: 700px) {
+    .years, .who, .what { grid-column: 1 / 13; }
+    .note, .contact, .elsewhere { grid-column: 1 / 13; }
+    .contact a.mail { font-size: 1rem; font-stretch: 100%; letter-spacing: 0.01em; }
+    nav { gap: calc(var(--u) * 2.5); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <a class="wordmark label" href="./">Anindya Chakraborty</a>
-  <div class="header-end">
-    <a class="label" href="./#work">Work</a>
-    <a class="label" href="https://anindyachakraborty.substack.com/" target="_blank" rel="noopener">Essays</a>
-    <a class="label" href="about.html" aria-current="page">About</a>
-    <button class="theme-btn" type="button" onclick="toggleTheme()" aria-label="Switch colour theme"></button>
-  </div>
+  <a class="wordmark" href="./">Anindya Chakraborty</a>
+  <nav>
+    <a href="./#works">Works</a>
+    <a href="https://anindyachakraborty.substack.com/" target="_blank" rel="noopener">Writing</a>
+    <a href="about.html" aria-current="page">Record</a>
+    <button class="swatch" type="button" onclick="toggleTheme()" aria-label="Switch between the light and dark ground"></button>
+  </nav>
 </header>
 
 <main>
 
-  <section class="intro shell">
-    <h1>Fifteen years<br>of shipping.</h1>
+  <section class="hero grid shell">
+    <h1><span>The</span><span>Record</span></h1>
     <div class="bio">
       <p>
         Product leader working at the intersection of banking, fintech and technology.
-        MBA from IIM Calcutta, Computer Science from Kalyani University. Programs worth
-        $150M+ across Amazon, Citi, PwC and Bandhan Bank — from payments infrastructure
-        processing millions of daily transactions to API monetisation strategies that
-        unlocked new revenue.
+        Programs worth $150M+ across Amazon, Citi, PwC and Bandhan Bank — from payments
+        infrastructure processing millions of daily transactions to API monetisation
+        strategies that unlocked new revenue.
       </p>
       <p>
         That domain depth now goes into building products independently: sourcing the
@@ -267,155 +304,187 @@
     </div>
   </section>
 
-  <section class="section shell">
-    <div class="label">Where I&rsquo;ve built</div>
-    <ol class="rows">
+  <div class="band">
+    <span class="band-label"><strong>Where I&rsquo;ve built</strong></span>
+    <span class="band-label">2003 &ndash; now</span>
+  </div>
 
-      <li class="row">
-        <div class="years label">2023 &ndash; now</div>
+  <ol class="rows">
+
+    <li>
+      <div class="row">
+        <div class="years">2023 &ndash; now</div>
         <div class="who">
           <h3>PwC</h3>
           <div class="role">Associate Director, Business Transformation</div>
         </div>
-        <div class="what">
+        <div class="what read">
           Multi-year roadmaps for mobility and sales-enablement products used by 2,500+
           people daily. Drove an Open API monetisation strategy across 400+ APIs,
           unlocking $6M of new income for a major bank. Published fintech white papers
           referenced by the C-suite in strategic planning.
         </div>
-      </li>
+      </div>
+    </li>
 
-      <li class="row">
-        <div class="years label">2022 &ndash; 2023</div>
+    <li>
+      <div class="row">
+        <div class="years">2022 &ndash; 2023</div>
         <div class="who">
           <h3>Amazon</h3>
           <div class="role">Head of Account Management, Global Selling</div>
         </div>
-        <div class="what">
+        <div class="what read">
           Led the Global Selling function driving $150M+ in gross merchandise sales at
           60% year-on-year growth. Secured budget for new regional programs, and
           neutralised a regulatory threat to $1B of seller revenue by mobilising
           cross-regional teams — retention held above 95%.
         </div>
-      </li>
+      </div>
+    </li>
 
-      <li class="row">
-        <div class="years label">2021 &ndash; 2022</div>
+    <li>
+      <div class="row">
+        <div class="years">2021 &ndash; 2022</div>
         <div class="who">
           <h3>PwC</h3>
           <div class="role">Associate Director, Business Transformation</div>
         </div>
-        <div class="what">
+        <div class="what read">
           Open API implementations for three banks at 250+ TPS and 99.5% uptime.
           Integrated 25+ partners into core banking via microservices, onboarding a
           million retail customers to digital channels. Full P&amp;L ownership across
           $21M of programs.
         </div>
-      </li>
+      </div>
+    </li>
 
-      <li class="row">
-        <div class="years label">2019 &ndash; 2021</div>
+    <li>
+      <div class="row">
+        <div class="years">2019 &ndash; 2021</div>
         <div class="who">
           <h3>Bandhan Bank</h3>
           <div class="role">Deputy Vice President, IT</div>
         </div>
-        <div class="what">
+        <div class="what read">
           Launched a mobile micro-banking platform handling 1.8M daily transactions
           across 24,000 field staff. Founded the IT PMO from scratch — hired and
           mentored six product managers to deliver org-wide transformation programs.
         </div>
-      </li>
+      </div>
+    </li>
 
-      <li class="row">
-        <div class="years label">2017 &ndash; 2018</div>
+    <li>
+      <div class="row">
+        <div class="years">2017 &ndash; 2018</div>
         <div class="who">
           <h3>Citi</h3>
-          <div class="role">Assistant Vice President, Trade &amp; Treasury</div>
+          <div class="role">AVP, Trade &amp; Treasury</div>
         </div>
-        <div class="what">
+        <div class="what read">
           Deployed SWIFT GPI across Asia and Latin America with four cross-functional
           teams, cutting cross-border payment tracking calls by 80%. Managed the annual
           program budget with full P&amp;L accountability.
         </div>
-      </li>
+      </div>
+    </li>
 
-      <li class="row">
-        <div class="years label">2003 &ndash; 2016</div>
+    <li>
+      <div class="row">
+        <div class="years">2003 &ndash; 2016</div>
         <div class="who">
           <h3>TCS</h3>
           <div class="role">Assistant Consultant</div>
         </div>
-        <div class="what">
-          Where it started. B2B products for a tobacco company&rsquo;s field sales force,
-          the first agile initiative at one of the world&rsquo;s top ten banks — worth $1M
-          in savings — and a B2B2C platform built on AWS from scratch. Thirteen years of
+        <div class="what read">
+          Where it started. B2B products for a tobacco company's field sales force, the
+          first agile initiative at one of the world's top ten banks — worth $1M in
+          savings — and a B2B2C platform built on AWS from scratch. Thirteen years of
           shipping across industries.
         </div>
-      </li>
+      </div>
+    </li>
 
-    </ol>
-  </section>
+  </ol>
 
-  <section class="section shell">
-    <div class="label">Foundations</div>
-    <ol class="rows">
-      <li class="row">
-        <div class="years label">2016 &ndash; 2017</div>
+  <div class="band">
+    <span class="band-label"><strong>Foundations</strong></span>
+    <span class="band-label">1999 &ndash; 2017</span>
+  </div>
+
+  <ol class="rows">
+    <li>
+      <div class="row">
+        <div class="years">2016 &ndash; 2017</div>
         <div class="who">
           <h3>IIM Calcutta</h3>
           <div class="role">MBA</div>
         </div>
-        <div class="what"></div>
-      </li>
-      <li class="row">
-        <div class="years label">1999 &ndash; 2003</div>
+        <div class="what read"></div>
+      </div>
+    </li>
+    <li>
+      <div class="row">
+        <div class="years">1999 &ndash; 2003</div>
         <div class="who">
           <h3>Kalyani University</h3>
           <div class="role">B.Tech, Computer Science</div>
         </div>
-        <div class="what"></div>
-      </li>
-    </ol>
+        <div class="what read"></div>
+      </div>
+    </li>
+  </ol>
+
+  <div class="band">
+    <span class="band-label"><strong>Beyond the record</strong></span>
+    <span class="band-label">Three notes</span>
+  </div>
+
+  <section class="notes grid shell">
+    <div class="note">
+      <h3>Beyond work</h3>
+      <p class="read">Exhibited photographer in Kolkata and New York. Reads 50+ books a year. Movie buff.</p>
+    </div>
+    <div class="note">
+      <h3>Pro bono</h3>
+      <p class="read">Startup mentor at ATF Labs — India's first assistive technology accelerator, supporting disability-focused startups.</p>
+    </div>
+    <div class="note">
+      <h3>Hands on with</h3>
+      <p class="read">Python, SQL, APIs, cloud architecture and system design. Lean Six Sigma Green Belt.</p>
+    </div>
   </section>
 
-  <div class="notes shell">
-    <div class="note">
-      <div class="label">Beyond work</div>
-      <p>Exhibited photographer in Kolkata and New York. Reads 50+ books a year. Movie buff.</p>
-    </div>
-    <div class="note">
-      <div class="label">Pro bono</div>
-      <p>Startup mentor at ATF Labs — India&rsquo;s first assistive technology accelerator, supporting disability-focused startups.</p>
-    </div>
-    <div class="note">
-      <div class="label">Hands on with</div>
-      <p>Python, SQL, APIs, cloud architecture and system design. Lean Six Sigma Green Belt.</p>
-    </div>
+  <div class="band">
+    <span class="band-label"><strong>Contact</strong></span>
+    <span class="band-label">Kolkata, India</span>
   </div>
 
 </main>
 
 <footer class="shell">
-  <div class="footer-top">
-    <a class="mail" href="mailto:anindya.chakraborty@gmail.com">anindya.chakraborty@gmail.com</a>
-    <nav class="label">
-      <a href="./#work">Work</a>
-      <a href="https://anindyachakraborty.substack.com/" target="_blank" rel="noopener">Substack</a>
-      <a href="https://www.linkedin.com/in/anindya-chakraborty/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/canindya" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://x.com/NtellShow" target="_blank" rel="noopener">X</a>
-    </nav>
+  <div class="grid">
+    <div class="contact">
+      <p class="mono-caps key">Email</p>
+      <a class="mail" href="mailto:anindya.chakraborty@gmail.com">anindya.chakraborty@gmail.com</a>
+    </div>
+    <ul class="elsewhere">
+      <li><a href="./#works">The works <i>&rarr;</i></a></li>
+      <li><a href="https://anindyachakraborty.substack.com/" target="_blank" rel="noopener">Substack <i>&rarr;</i></a></li>
+      <li><a href="https://www.linkedin.com/in/anindya-chakraborty/" target="_blank" rel="noopener">LinkedIn <i>&rarr;</i></a></li>
+      <li><a href="https://github.com/canindya" target="_blank" rel="noopener">GitHub <i>&rarr;</i></a></li>
+    </ul>
   </div>
-  <div class="footer-end label">
-    <span>Kolkata, India</span>
+  <div class="colophon mono-caps">
+    <span>&copy; 2026 Anindya Chakraborty</span>
+    <span>Five works, built solo</span>
   </div>
 </footer>
 
 <script>
-  // Theme toggle. The initial theme is set by the blocking script in <head>.
   function toggleTheme() {
     var html = document.documentElement;
-    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     html.setAttribute('data-theme', next);
     try { localStorage.setItem('theme', next); } catch (e) {}
   }
